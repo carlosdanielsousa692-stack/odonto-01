@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+@layer base {
+  /* Visible focus ring on interactive elements for keyboard accessibility */
+  :focus-visible {
+    outline: 2px solid #00A8CC;
+    outline-offset: 2px;
+  }
+
+  /* Prevent unexpected horizontal scrollbars on mobile */
+  html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  /* Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

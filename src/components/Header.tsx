@@ -1,213 +1,186 @@
-import React, { useState } from 'react';
-import { Phone, Clock, MapPin, Menu, X, Calendar, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Phone, Clock, Menu, X, Calendar } from 'lucide-react';
 import { CLINIC_INFO } from '../data/dentalData';
+import { calButtonAttributes, handleCalFallback, CAL_PUBLIC_URL } from '../utils/cal';
 
 interface HeaderProps {
-  currentTab: string;
-  setCurrentTab: (tab: string) => void;
-  homeVariant: 'home-1' | 'home-2' | 'home-3';
-  setHomeVariant: (variant: 'home-1' | 'home-2' | 'home-3') => void;
   onOpenBooking: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({
-  currentTab,
-  setCurrentTab,
-  homeVariant,
-  setHomeVariant,
-  onOpenBooking,
-}) => {
+export const Header: React.FC<HeaderProps> = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const navLinks = [
-    { id: 'home', label: 'Home' },
-    { id: 'about', label: 'About Us' },
-    { id: 'services', label: 'Services' },
-    { id: 'testimonials', label: 'Testimonials' },
-    { id: 'faq', label: 'FAQ' },
-    { id: 'blog', label: 'Blog' },
-    { id: 'contact', label: 'Contact' },
+  // Close mobile drawer on ESC key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  const navSections = [
+    { id: 'inicio', label: 'Início' },
+    { id: 'servicos', label: 'Serviços' },
+    { id: 'diferenciais', label: 'Diferenciais' },
+    { id: 'clinica', label: 'A Clínica' },
+    { id: 'depoimentos', label: 'Depoimentos' },
+    { id: 'faq', label: 'Dúvidas' },
+    { id: 'contato', label: 'Contato' },
   ];
 
-  const handleNavClick = (tabId: string) => {
-    setCurrentTab(tabId);
+  const handleNavClick = (sectionId: string, e: React.MouseEvent) => {
+    e.preventDefault();
     setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <header className="w-full bg-white border-b border-slate-100 sticky top-0 z-40 transition-all shadow-xs">
+    <header className="w-full bg-white border-b border-slate-100 sticky top-0 z-40 shadow-xs">
       {/* Top Announcement Bar */}
       <div className="bg-[#004F6E] text-white text-xs py-2 px-4 sm:px-8 border-b border-[#003c54]">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-2 gap-x-6">
           <div className="flex items-center gap-6 flex-wrap">
             <a
               href={`tel:${CLINIC_INFO.emergencyPhone.replace(/[^0-9+]/g, '')}`}
-              className="flex items-center gap-1.5 text-cyan-200 hover:text-white font-medium transition-colors whitespace-nowrap"
+              className="flex items-center gap-1.5 text-cyan-200 hover:text-white font-medium transition-colors whitespace-nowrap focus-visible:ring-1 focus-visible:ring-cyan-300 rounded px-1"
+              aria-label={`Ligue para emergência odontológica no número ${CLINIC_INFO.emergencyPhone}`}
             >
-              <Phone className="w-3.5 h-3.5 text-[#00A8CC]" />
-              <span>Emergency: {CLINIC_INFO.emergencyPhone}</span>
+              <Phone className="w-3.5 h-3.5 text-[#00A8CC]" aria-hidden="true" />
+              <span>Plantão: {CLINIC_INFO.emergencyPhone}</span>
             </a>
-            <div className="hidden md:flex items-center gap-1.5 text-slate-300 whitespace-nowrap">
-              <Clock className="w-3.5 h-3.5 text-[#00A8CC]" />
-              <span>Mon-Fri: 8am-8pm · Sat: 9am-5pm</span>
-            </div>
-            <div className="hidden lg:flex items-center gap-1.5 text-slate-300 whitespace-nowrap">
-              <MapPin className="w-3.5 h-3.5 text-[#00A8CC]" />
-              <span>450 Health Pkwy, New York</span>
+
+            <div className="hidden md:flex items-center gap-1.5 text-slate-300">
+              <Clock className="w-3.5 h-3.5 text-[#00A8CC]" aria-hidden="true" />
+              <span>Seg – Sex: 08:00 – 20:00 · Sáb: 09:00 – 17:00</span>
             </div>
           </div>
 
-          {/* Elementor Kit Variant Selector (Home 1, Home 2, Home 3) */}
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-400 hidden sm:inline">Kit View:</span>
-            <div className="inline-flex items-center bg-[#00384f] rounded p-0.5 border border-[#006085]">
-              <button
-                type="button"
-                onClick={() => {
-                  setHomeVariant('home-1');
-                  if (currentTab !== 'home') setCurrentTab('home');
-                }}
-                className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                  currentTab === 'home' && homeVariant === 'home-1'
-                    ? 'bg-[#00A8CC] text-white'
-                    : 'text-slate-300 hover:text-white'
-                }`}
-              >
-                Home 1
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setHomeVariant('home-2');
-                  if (currentTab !== 'home') setCurrentTab('home');
-                }}
-                className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                  currentTab === 'home' && homeVariant === 'home-2'
-                    ? 'bg-[#00A8CC] text-white'
-                    : 'text-slate-300 hover:text-white'
-                }`}
-              >
-                Home 2
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setHomeVariant('home-3');
-                  if (currentTab !== 'home') setCurrentTab('home');
-                }}
-                className={`px-2 py-0.5 rounded text-[11px] font-medium transition-colors ${
-                  currentTab === 'home' && homeVariant === 'home-3'
-                    ? 'bg-[#00A8CC] text-white'
-                    : 'text-slate-300 hover:text-white'
-                }`}
-              >
-                Home 3
-              </button>
-            </div>
+          <div className="flex items-center gap-3 text-xs">
+            <span className="hidden sm:inline text-slate-300">Agendamento 100% Online:</span>
+            <a
+              href={CAL_PUBLIC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#FDD835] hover:underline font-semibold"
+            >
+              Cal.com em Tempo Real ↗
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Main Top Bar (Complies with 3-Zone Contract: Brand — Links — 1 Action) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex items-center justify-between gap-8">
-        {/* Zone 1: Single element brand wordmark */}
-        <button
-          type="button"
-          onClick={() => handleNavClick('home')}
-          className="flex items-center gap-2.5 text-left whitespace-nowrap shrink-0 group focus:outline-hidden"
+      {/* Main Navigation Bar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between gap-4">
+        {/* Brand Wordmark */}
+        <a
+          href="#inicio"
+          onClick={(e) => handleNavClick('inicio', e)}
+          className="flex items-center gap-2 group cursor-pointer focus-visible:ring-2 focus-visible:ring-[#00A8CC] rounded-lg p-0.5"
+          aria-label="Caredent - Voltar ao início"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#004F6E] to-[#00A8CC] flex items-center justify-center text-white shadow-xs group-hover:scale-105 transition-transform">
-            <svg
-              className="w-6 h-6 fill-current"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M12 2C8.5 2 6 4.5 6 8c0 2.5 1 4.5 2 7 1 2.5 1 5 1.5 7 .2.8 1.2 1 1.8.5.8-.7 1.5-2 1.7-4 .2-2-.5-3.5-.5-5 0-1.5.5-2.5 1.5-2.5s1.5 1 1.5 2.5c0 1.5-.7 3-.5 5 .2 2 .9 3.3 1.7 4 .6.5 1.6.3 1.8-.5.5-2 .5-4.5 1.5-7 1-2.5 2-4.5 2-7 0-3.5-2.5-6-6-6z" />
-            </svg>
+          <div className="w-9 h-9 rounded-xl bg-[#004F6E] flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:bg-[#003c54] transition-colors">
+            C
           </div>
           <div>
-            <span className="text-2xl font-bold tracking-tight text-[#004F6E]">
-              Care<span className="text-[#00A8CC]">dent</span>
+            <span className="text-xl font-bold text-[#004F6E] tracking-tight block leading-none">
+              Caredent
             </span>
-            <span className="block text-[10px] tracking-wider uppercase font-semibold text-slate-500">
-              Dental Clinic
+            <span className="text-[10px] text-[#00A8CC] font-semibold tracking-wider uppercase block mt-0.5">
+              Clínica Odontológica
             </span>
           </div>
-        </button>
+        </a>
 
-        {/* Zone 2: Concise single-line navigation links */}
-        <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-slate-700">
-          {navLinks.map((link) => (
-            <button
-              key={link.id}
-              type="button"
-              onClick={() => handleNavClick(link.id)}
-              className={`whitespace-nowrap transition-colors py-1 cursor-pointer border-b-2 ${
-                currentTab === link.id
-                  ? 'text-[#00A8CC] border-[#00A8CC] font-semibold'
-                  : 'text-slate-600 border-transparent hover:text-[#004F6E] hover:border-slate-300'
-              }`}
+        {/* Desktop Single-Line In-Page Navigation Links */}
+        <nav
+          className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600"
+          aria-label="Navegação da página"
+        >
+          {navSections.map((sec) => (
+            <a
+              key={sec.id}
+              href={`#${sec.id}`}
+              onClick={(e) => handleNavClick(sec.id, e)}
+              className="hover:text-[#00A8CC] transition-colors whitespace-nowrap py-1 focus-visible:ring-1 focus-visible:ring-[#00A8CC] rounded"
             >
-              {link.label}
-            </button>
+              {sec.label}
+            </a>
           ))}
         </nav>
 
-        {/* Zone 3: 1 Primary Action */}
-        <div className="flex items-center gap-3 shrink-0">
+        {/* Primary Action Button */}
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <button
             type="button"
-            onClick={onOpenBooking}
-            className="flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#00A8CC] hover:bg-[#008cae] rounded-lg shadow-sm transition-all hover:shadow hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap shrink-0 cursor-pointer"
+            {...calButtonAttributes}
+            onClick={handleCalFallback}
+            className="flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 min-h-[44px] bg-[#00A8CC] hover:bg-[#008cae] text-white text-xs sm:text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-[#00A8CC] focus-visible:ring-offset-2"
           >
-            <Calendar className="w-4 h-4" />
-            <span>Book Appointment</span>
+            <Calendar className="w-4 h-4 shrink-0" aria-hidden="true" />
+            <span className="hidden xs:inline">Agendar Consulta</span>
+            <span className="xs:hidden">Agendar</span>
           </button>
 
-          {/* Mobile hamburger toggle */}
+          {/* Mobile Menu Toggle Button */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-slate-600 hover:text-[#004F6E] rounded-md focus:outline-hidden"
-            aria-label="Toggle navigation menu"
+            className="lg:hidden p-2 min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-700 hover:text-[#004F6E] rounded-lg transition-colors cursor-pointer focus-visible:ring-2 focus-visible:ring-[#00A8CC]"
+            aria-label={mobileMenuOpen ? 'Fechar menu de navegação' : 'Abrir menu de navegação'}
+            aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Drawer Navigation */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-slate-100 px-6 py-4 shadow-xl">
-          <div className="flex flex-col gap-2">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                type="button"
-                onClick={() => handleNavClick(link.id)}
-                className={`text-left py-2.5 px-3 rounded-md text-sm font-medium transition-colors ${
-                  currentTab === link.id
-                    ? 'bg-cyan-50 text-[#00A8CC] font-semibold'
-                    : 'text-slate-700 hover:bg-slate-50'
-                }`}
+        <div
+          className="lg:hidden bg-white border-b border-slate-200 px-4 py-4 space-y-3 shadow-lg"
+          role="region"
+          aria-label="Menu móvel de seções"
+        >
+          <div className="grid grid-cols-2 gap-2">
+            {navSections.map((sec) => (
+              <a
+                key={sec.id}
+                href={`#${sec.id}`}
+                onClick={(e) => handleNavClick(sec.id, e)}
+                className="w-full text-left px-3.5 py-2.5 rounded-lg text-xs font-semibold text-slate-700 bg-slate-50 hover:bg-cyan-50 hover:text-[#004F6E] transition-colors"
               >
-                {link.label}
-              </button>
+                {sec.label}
+              </a>
             ))}
-            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenBooking();
-                }}
-                className="w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold text-white bg-[#00A8CC] rounded-lg shadow-sm"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Book Appointment</span>
-              </button>
-            </div>
+          </div>
+
+          <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+            <button
+              type="button"
+              {...calButtonAttributes}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleCalFallback(e);
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 min-h-[44px] bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold text-xs rounded-xl shadow-xs cursor-pointer"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Agendar Consulta Online</span>
+            </button>
+            <a
+              href={CAL_PUBLIC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center text-xs text-[#00A8CC] hover:underline font-medium py-1"
+            >
+              Abrir link direto no Cal.com ↗
+            </a>
           </div>
         </div>
       )}

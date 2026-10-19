@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { calButtonAttributes, handleCalFallback, CAL_PUBLIC_URL } from '../utils/cal';
 
 interface SmileComparisonProps {
   onOpenBooking: () => void;
@@ -18,7 +19,7 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
       description: 'Corrected chipped incisors, minor spacing, and deep tetracycline discoloration using ultra-thin custom ceramic veneers.',
       beforeText: 'Discoloration & irregular enamel chips',
       afterText: 'Harmonious Hollywood arch & natural luminescence',
-      image: '/src/assets/images/happy_patient_smile_1792366053067.jpg'
+      image: '/images/happy_patient_smile_1792366053067.webp'
     },
     {
       title: 'Digital Clear Aligners & Contouring',
@@ -28,7 +29,7 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
       description: 'Corrected severe lower crowding and narrow upper smile arch with gentle clear aligners and enamel micro-abrasion.',
       beforeText: 'Severe lower crowding & bite interference',
       afterText: 'Symmetrical alignment & comfortable natural bite',
-      image: '/src/assets/images/hero_dentist_consultation_1792366051819.jpg'
+      image: '/images/hero_dentist_consultation_1792366051819.webp'
     }
   ];
 
@@ -41,7 +42,7 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
         <div className="lg:col-span-5 space-y-5">
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FDD835] uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Real Patient Smile Transformation</span>
+            <span>Casos Clínicos Ilustrativos · Demonstração</span>
           </div>
 
           <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -85,15 +86,24 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
             ))}
           </div>
 
-          <div className="pt-2">
+          <div className="pt-2 flex flex-col items-start gap-2">
             <button
               type="button"
-              onClick={onOpenBooking}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold rounded-xl text-sm transition-all shadow-md cursor-pointer"
+              {...calButtonAttributes}
+              onClick={handleCalFallback}
+              className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold rounded-xl text-sm transition-all shadow-md cursor-pointer"
             >
               <span>Schedule Smile Consultation</span>
               <ArrowRight className="w-4 h-4" />
             </button>
+            <a
+              href={CAL_PUBLIC_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs text-cyan-200 hover:text-white underline transition-colors"
+            >
+              Ou agende diretamente na página do Cal.com ↗
+            </a>
           </div>
         </div>
 
@@ -104,7 +114,10 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
               src={current.image}
               alt={current.title}
               className="w-full h-full object-cover"
-              referrerPolicy="no-referrer"
+              loading="lazy"
+              decoding="async"
+              width={720}
+              height={450}
             />
             {/* Visual overlay badge */}
             <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-xs text-white text-xs px-3 py-1.5 rounded-lg border border-white/10">

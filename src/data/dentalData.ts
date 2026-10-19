@@ -1,26 +1,103 @@
 import { ServiceItem, Doctor, Testimonial, BlogPost, FAQItem } from '../types';
 
-export const CLINIC_INFO = {
-  name: 'Caredent',
-  fullName: 'Caredent Dental Clinic',
-  tagline: 'Comprehensive & Compassionate Dental Healthcare',
-  emergencyPhone: '+1 (800) 555-2273',
-  receptionPhone: '+1 (555) 384-9102',
-  email: 'contact@caredent-clinic.com',
-  address: '450 Health Parkway, Suite 300, New York, NY 10016',
-  hours: {
-    weekdays: 'Monday – Friday: 8:00 AM – 8:00 PM',
-    saturday: 'Saturday: 9:00 AM – 5:00 PM',
-    sunday: 'Sunday: Emergency Care Only (By Appointment)',
+/**
+ * ============================================================================
+ * CONFIGURAÇÃO COMERCIAL E DE PUBLICAÇÃO DA CLÍNICA
+ * ============================================================================
+ * Este arquivo centraliza todas as informações da clínica exibidas no site.
+ * 
+ * ATENÇÃO RESPONSÁVEL TÉCNICO / ADMINISTRADOR:
+ * Antes de colocar o site em produção com tráfego real de pacientes, revise
+ * todos os campos marcados com [CONFIGURAR ANTES DE PUBLICAR] e altere
+ * `isProductionReady` para `true`.
+ */
+
+export const CLINIC_CONFIG = {
+  // Flag que indica se o site já possui dados comerciais reais validados
+  publicationStatus: {
+    isProductionReady: false, // Alterar para `true` após preencher todos os dados reais
+    isDemoData: true,
+    demoNotice:
+      'Atenção: Este site está em modo de pré-visualização. Dados de contato, médicos, depoimentos, preços e estatísticas são demonstrativos e devem ser configurados pelo responsável técnico antes do lançamento comercial.',
   },
+
+  // Informações Institucionais e Legais
+  branding: {
+    name: 'Caredent',
+    fullName: 'Caredent Dental Clinic',
+    tagline: 'Odontologia Moderna, Cuidado Humanizado e Tecnologia Digital',
+    // [CONFIGURAR ANTES DE PUBLICAR] Preencher razão social e CNPJ se aplicável
+    legalEntityName: '[CONFIGURAR: Razão Social da Clínica Odontológica Ltda.]',
+    taxId: '[CONFIGURAR: CNPJ da Clínica]',
+    // [CONFIGURAR ANTES DE PUBLICAR] Responsável técnico e registro no Conselho Regional
+    technicalDirector: {
+      name: '[CONFIGURAR: Nome do Cirurgião-Dentista Responsável]',
+      registry: '[CONFIGURAR: CRO-UF XXXXX]',
+    },
+  },
+
+  // Meios de Contato
+  contact: {
+    // [CONFIGURAR ANTES DE PUBLICAR] Telefone fixo da recepção
+    receptionPhone: '+1 (555) 384-9102',
+    // [CONFIGURAR ANTES DE PUBLICAR] Linha de urgências ou WhatsApp
+    emergencyPhone: '+1 (800) 555-2273',
+    // [CONFIGURAR ANTES DE PUBLICAR] E-mail de atendimento da clínica
+    email: 'contact@caredent-clinic.com',
+    // [CONFIGURAR ANTES DE PUBLICAR] Endereço completo da clínica
+    address: {
+      street: '450 Health Parkway, Suite 300',
+      city: 'New York',
+      state: 'NY',
+      postalCode: '10016',
+      country: 'US',
+      fullFormatted: '450 Health Parkway, Suite 300, New York, NY 10016',
+    },
+    // [CONFIGURAR ANTES DE PUBLICAR] Horários de atendimento
+    hours: {
+      weekdays: 'Segunda a Sexta: 08:00 – 20:00',
+      saturday: 'Sábado: 09:00 – 17:00',
+      sunday: 'Domingo: Plantão sob agendamento',
+    },
+  },
+
+  // Integração com Agendamento Cal.com
+  booking: {
+    eventSlug: 'carlos-uehebs-cauefz/doutor',
+    publicUrl: 'https://cal.com/carlos-uehebs-cauefz/doutor',
+  },
+
+  // Estatísticas da Clínica (Demonstrativas para layout)
   stats: [
-    { label: 'Happy Patients', value: '18,500+' },
-    { label: 'Years of Excellence', value: '16+' },
-    { label: 'Dental Specialists', value: '12' },
-    { label: '5-Star Reviews', value: '99.4%' },
-  ]
+    { label: 'Pacientes Atendidos', value: '18.500+' },
+    { label: 'Anos de Tradição', value: '16+' },
+    { label: 'Especialistas', value: '12' },
+    { label: 'Avaliações Positivas', value: '99.4%' },
+  ],
 };
 
+/**
+ * Objeto legado para retrocompatibilidade com componentes existentes.
+ */
+export const CLINIC_INFO = {
+  name: CLINIC_CONFIG.branding.name,
+  fullName: CLINIC_CONFIG.branding.fullName,
+  tagline: CLINIC_CONFIG.branding.tagline,
+  emergencyPhone: CLINIC_CONFIG.contact.emergencyPhone,
+  receptionPhone: CLINIC_CONFIG.contact.receptionPhone,
+  email: CLINIC_CONFIG.contact.email,
+  address: CLINIC_CONFIG.contact.address.fullFormatted,
+  hours: CLINIC_CONFIG.contact.hours,
+  stats: CLINIC_CONFIG.stats,
+  isDemo: CLINIC_CONFIG.publicationStatus.isDemoData,
+  demoNotice: CLINIC_CONFIG.publicationStatus.demoNotice,
+};
+
+/**
+ * Catálogo de Procedimentos e Serviços Odontológicos
+ * Nota: Os valores apresentados são faixas estimadas demonstrativas.
+ * Conforme normas deontológicas, o orçamento definitivo requer avaliação clínica presencial.
+ */
 export const CLINIC_SERVICES: ServiceItem[] = [
   {
     id: 'general-checkup',
@@ -28,7 +105,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Comprehensive oral examination, digital low-radiation X-rays, plaque scaling, and enamel polishing.',
     category: 'General',
     icon: 'Sparkles',
-    priceEstimate: '$120 - $180',
+    priceEstimate: '$120 - $180 (estimativa)',
     duration: '45 - 60 mins',
     features: ['Ultrasonic deep scaling', 'High-res intraoral scanning', 'Cavity & gum health assessment', 'Fluoride enamel protection'],
     description: 'Our routine dental exams detect issues before they become painful or costly. We clean hard-to-reach tartar and polish teeth for a fresh, clean feeling.'
@@ -39,7 +116,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'In-office laser whitening delivering up to 8 shades brighter in a single 60-minute visit.',
     category: 'Cosmetic',
     icon: 'Smile',
-    priceEstimate: '$299 - $450',
+    priceEstimate: '$299 - $450 (estimativa)',
     duration: '60 mins',
     features: ['Instant results in 1 session', 'Custom sensitivity-reducing gel', 'Take-home touch-up kit included', 'Safe for tooth enamel'],
     description: 'Safe, clinically supervised dental whitening using state-of-the-art cold blue LED technology that lifts deep coffee, tea, and aging stains safely.'
@@ -50,7 +127,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Permanent, natural-looking titanium and ceramic root replacements with 98% lifetime success rate.',
     category: 'Restorative',
     icon: 'ShieldCheck',
-    priceEstimate: '$1,200 - $2,500',
+    priceEstimate: '$1,200 - $2,500 (estimativa)',
     duration: '2 - 3 visits',
     features: ['3D CBCT guided precision placement', 'Premium Swiss titanium implants', 'Custom porcelain crown match', 'Lifetime warranty on fixtures'],
     description: 'Replace missing teeth permanently. Dental implants restore complete chewing power, preserve facial bone structure, and feel identical to natural teeth.'
@@ -61,7 +138,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Discreet, removable clear aligners that gently straighten teeth without traditional metal brackets.',
     category: 'Orthodontics',
     icon: 'Activity',
-    priceEstimate: '$2,800 - $4,800',
+    priceEstimate: '$2,800 - $4,800 (estimativa)',
     duration: '6 - 18 months',
     features: ['Virtually invisible trays', 'Digital 3D smile projection', 'Removable for eating and brushing', 'Monthly check-ins & progress scans'],
     description: 'Straighten your teeth comfortably and discreetly. Designed for teenagers and working professionals seeking aesthetic smile alignment.'
@@ -72,7 +149,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Gentle, friendly, anxiety-free dental visits tailored specially for infants, children, and teens.',
     category: 'Pediatric',
     icon: 'HeartPulse',
-    priceEstimate: '$90 - $150',
+    priceEstimate: '$90 - $150 (estimativa)',
     duration: '30 - 45 mins',
     features: ['Child-friendly sensory environment', 'Protective dental sealants', 'Habit counseling & gentle coaching', 'Pain-free numbing techniques'],
     description: 'We believe positive childhood dental visits create lifelong healthy habits. Our pediatric specialists create a cheerful, stress-free experience.'
@@ -83,7 +160,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Same-day immediate relief for severe toothaches, broken teeth, lost crowns, or dental trauma.',
     category: 'Emergency',
     icon: 'AlertCircle',
-    priceEstimate: '$150 - $350',
+    priceEstimate: '$150 - $350 (estimativa)',
     duration: 'Immediate / Same Day',
     features: ['Same-day emergency appointments', 'Rapid pain relief sedation', 'Fracture and crown repair', 'Direct emergency hotline'],
     description: 'Dental pain cannot wait. When emergencies strike, our dedicated on-call dental surgeons provide immediate relief and preservation treatment.'
@@ -94,7 +171,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Ultra-thin, handcrafted porcelain shells bonded to the front of teeth for a Hollywood-standard smile makeover.',
     category: 'Cosmetic',
     icon: 'Award',
-    priceEstimate: '$800 - $1,400 per tooth',
+    priceEstimate: '$800 - $1,400 por dente (estimativa)',
     duration: '2 appointments',
     features: ['Stain-resistant ceramic', 'Custom color-matched to complexion', 'Minimally invasive preparation', 'Durable 15+ year lifespan'],
     description: 'Correct chips, gaps, severe discoloration, and minor misalignment with custom-designed porcelain veneers tailored to your facial aesthetics.'
@@ -105,13 +182,18 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Advanced microscopic endodontic treatment to save severely infected teeth and eliminate toothache.',
     category: 'Restorative',
     icon: 'ShieldCheck',
-    priceEstimate: '$650 - $1,100',
+    priceEstimate: '$650 - $1,100 (estimativa)',
     duration: '60 - 90 mins',
     features: ['Microscopic precision cleaning', '100% painless local anesthesia', 'Tooth preservation vs extraction', 'Reinforced ceramic core crown'],
     description: 'Modern root canals are as comfortable as getting a standard filling. Our endodontists eliminate the infection and save your natural tooth.'
   }
 ];
 
+/**
+ * Corpo Clínico (Perfis ilustrativos para layout)
+ * [CONFIGURAR ANTES DE PUBLICAR]: Substituir com as fotos, nomes e registros
+ * do conselho profissional (CRO) dos dentistas da clínica.
+ */
 export const CLINIC_DOCTORS: Doctor[] = [
   {
     id: 'dr-arthur-sterling',
@@ -121,7 +203,7 @@ export const CLINIC_DOCTORS: Doctor[] = [
     experience: '18 Years Experience',
     education: 'Columbia University College of Dental Medicine',
     bio: 'Fellow of the International Congress of Oral Implantologists with over 4,000 successful implant and bone grafting procedures. Passionate about painless digital surgery.',
-    image: '/src/assets/images/dentist_doctor_portrait_1792366053271.jpg',
+    image: '/images/dentist_doctor_portrait_1792366053271.webp',
     daysAvailable: ['Mon', 'Tue', 'Thu', 'Fri']
   },
   {
@@ -132,7 +214,7 @@ export const CLINIC_DOCTORS: Doctor[] = [
     experience: '12 Years Experience',
     education: 'University of Pennsylvania School of Dental Medicine',
     bio: 'Recognized by the American Academy of Cosmetic Dentistry. Dr. Jenkins specializes in porcelain veneers, digital smile design, and minimally invasive aesthetics.',
-    image: '/src/assets/images/hero_dentist_consultation_1792366051819.jpg',
+    image: '/images/hero_dentist_consultation_1792366051819.webp',
     daysAvailable: ['Mon', 'Wed', 'Thu', 'Sat']
   },
   {
@@ -143,11 +225,14 @@ export const CLINIC_DOCTORS: Doctor[] = [
     experience: '10 Years Experience',
     education: 'Harvard School of Dental Medicine',
     bio: 'Board-certified pediatric dentist dedicated to making children look forward to visiting the dentist. Certified in behavioral management and pediatric sedation.',
-    image: '/src/assets/images/happy_patient_smile_1792366053067.jpg',
+    image: '/images/happy_patient_smile_1792366053067.webp',
     daysAvailable: ['Tue', 'Wed', 'Fri', 'Sat']
   }
 ];
 
+/**
+ * Artigos Educativos do Blog
+ */
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: 1107,
@@ -158,7 +243,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'Oct 12, 2026',
     author: 'Dr. Arthur J. Sterling',
     excerpt: 'Discover why skipping your bi-annual dental cleaning can lead to unnoticed gum issues, systemic health concerns, and preventable tooth loss.',
-    image: '/src/assets/images/dental_hygiene_procedure_1792366052723.jpg',
+    image: '/images/dental_hygiene_procedure_1792366052723.webp',
     keyTakeaways: [
       'Early detection prevents 90% of severe root canal interventions',
       'Professional ultrasonic scaling removes hardened calculus that toothbrushes cannot',
@@ -180,7 +265,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'Oct 05, 2026',
     author: 'Dr. Sarah Jenkins',
     excerpt: 'Practical, dentist-approved habits to prevent staining, protect enamel luster, and prolong the longevity of your professional whitening treatments.',
-    image: '/src/assets/images/happy_patient_smile_1792366053067.jpg',
+    image: '/images/happy_patient_smile_1792366053067.webp',
     keyTakeaways: [
       'Rinse with plain water immediately after consuming red wine, dark coffee, or berries',
       'Avoid abrasive charcoal toothpastes that strip protective enamel layers',
@@ -203,7 +288,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'Sep 28, 2026',
     author: 'Dr. Arthur J. Sterling',
     excerpt: 'We dismantle the most persistent oral healthcare misconceptions, from hard-bristled brushing to the truth about sugar and cavity development.',
-    image: '/src/assets/images/dental_clinic_interior_1792366051724.jpg',
+    image: '/images/dental_clinic_interior_1792366051724.webp',
     keyTakeaways: [
       'Hard brushing does NOT clean better; it causes permanent gum recession and enamel wear',
       'Sugar alone does not cause cavities—bacterial acid produced from lingering carbs does',
@@ -225,7 +310,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'Sep 20, 2026',
     author: 'Dr. Elena Ramos',
     excerpt: 'Compassionate strategies for parents to make their child’s dental visits fun, peaceful, and empowering rather than intimidating.',
-    image: '/src/assets/images/hero_dentist_consultation_1792366051819.jpg',
+    image: '/images/hero_dentist_consultation_1792366051819.webp',
     keyTakeaways: [
       'Use positive, neutral language—avoid words like "needle", "shot", or "pain"',
       'Schedule morning appointments when children are well-rested and relaxed',
@@ -247,7 +332,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'Sep 14, 2026',
     author: 'Dr. Arthur J. Sterling',
     excerpt: 'Your mouth is the gateway to your body. Learn how periodontal infection directly impacts cardiovascular health, diabetes control, and pregnancy.',
-    image: '/src/assets/images/dental_hygiene_procedure_1792366052723.jpg',
+    image: '/images/dental_hygiene_procedure_1792366052723.webp',
     keyTakeaways: [
       'Chronic gum inflammation elevates systemic inflammatory markers like C-reactive protein (CRP)',
       'Periodontal disease is linked to higher risk of arterial plaque buildup and cardiovascular disease',
@@ -269,7 +354,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: 'Sep 02, 2026',
     author: 'Dr. Arthur J. Sterling',
     excerpt: 'A comprehensive medical comparison of permanent titanium dental implants versus modern dentures, analyzing cost, longevity, comfort, and bone preservation.',
-    image: '/src/assets/images/dental_clinic_interior_1792366051724.jpg',
+    image: '/images/dental_clinic_interior_1792366051724.webp',
     keyTakeaways: [
       'Implants stimulate jawbone density and prevent facial collapse caused by missing roots',
       'Modern removable dentures offer a non-surgical and budget-friendly alternative',
@@ -284,6 +369,11 @@ export const BLOG_POSTS: BlogPost[] = [
   }
 ];
 
+/**
+ * Depoimentos de Pacientes (Exemplos ilustrativos para layout)
+ * [CONFIGURAR ANTES DE PUBLICAR]: Substituir com depoimentos reais devidamente
+ * autorizados por escrito pelos pacientes da clínica.
+ */
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't-1',
@@ -292,7 +382,7 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     review: 'Dr. Sarah Jenkins and the team at Caredent transformed my entire smile before my wedding. The digital preview showed me exactly how it would look, and the final results exceeded all expectations. Zero pain and unmatched attention to detail.',
     date: 'September 2026',
-    verified: true,
+    verified: false,
     avatarText: 'VH'
   },
   {
@@ -302,7 +392,7 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     review: 'I broke a front molar playing basketball and was terrified of the surgery. Dr. Sterling used 3D computer navigation and the procedure was done before I knew it. It looks and bites completely identical to my real teeth.',
     date: 'August 2026',
-    verified: true,
+    verified: false,
     avatarText: 'MM'
   },
   {
@@ -312,7 +402,7 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     review: 'My 6-year-old son used to cry at the mere thought of a dentist. Dr. Elena Ramos was so gentle, patient, and cheerful that he actually asked when we could go back! The entire clinic is spotless, welcoming, and high-tech.',
     date: 'October 2026',
-    verified: true,
+    verified: false,
     avatarText: 'SL'
   },
   {
@@ -322,11 +412,14 @@ export const TESTIMONIALS: Testimonial[] = [
     rating: 5,
     review: 'At 42, I finally decided to straighten my crowded bottom teeth. The clear aligners were completely undetectable at work and took just 8 months. Followed up with their in-office laser whitening—worth every penny.',
     date: 'July 2026',
-    verified: true,
+    verified: false,
     avatarText: 'DP'
   }
 ];
 
+/**
+ * Dúvidas Frequentes (FAQ)
+ */
 export const FAQS: FAQItem[] = [
   {
     id: 'faq-1',

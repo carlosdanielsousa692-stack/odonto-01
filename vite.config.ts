@@ -3,15 +3,33 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 import {defineConfig} from 'vite';
 
-export default defineConfig(() => {
+export default defineConfig(({ command }) => {
+  if (command === 'build') {
+    process.env.NODE_ENV = 'production';
+  }
+
   return {
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve(import.meta.dirname, '.'),
+      },
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) {
+              return 'vendor-react';
+            }
+          },
+        },
       },
     },
     server: {
+      port: 3000,
+      host: '0.0.0.0',
+      allowedHosts: true as const,
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',

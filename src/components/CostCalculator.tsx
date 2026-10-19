@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { DollarSign, ShieldCheck, Sparkles, ArrowRight, HelpCircle } from 'lucide-react';
+import { calButtonAttributes, handleCalFallback, CAL_PUBLIC_URL } from '../utils/cal';
 
 interface CostCalculatorProps {
   onOpenBooking: () => void;
@@ -187,13 +188,29 @@ export const CostCalculator: React.FC<CostCalculatorProps> = ({ onOpenBooking })
 
           <button
             type="button"
-            onClick={onOpenBooking}
-            className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#00A8CC] hover:bg-[#008cae] text-white text-sm font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
+            {...calButtonAttributes}
+            onClick={handleCalFallback}
+            className="w-full flex items-center justify-center gap-2 py-3.5 px-4 min-h-[44px] bg-[#00A8CC] hover:bg-[#008cae] text-white text-sm font-semibold rounded-xl shadow-xs transition-colors cursor-pointer"
           >
             <span>Book With Transparent Pricing</span>
             <ArrowRight className="w-4 h-4" />
           </button>
+          <a
+            href={CAL_PUBLIC_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-center text-xs text-cyan-200 hover:text-white underline mt-2.5 transition-colors"
+          >
+            Preferência por link direto no Cal.com ↗
+          </a>
         </div>
+      </div>
+
+      {/* Deontological & Demo Disclaimer */}
+      <div className="mt-4 pt-3 border-t border-slate-200 text-center">
+        <p className="text-[11px] text-slate-500 leading-relaxed max-w-2xl mx-auto">
+          * Valores e coberturas apresentados são simulações demonstrativas. Conforme as normas éticas odontológicas, qualquer plano de tratamento e orçamento definitivo dependem obrigatoriamente de consulta e exame clínico presencial individualizado.
+        </p>
       </div>
     </div>
   );
