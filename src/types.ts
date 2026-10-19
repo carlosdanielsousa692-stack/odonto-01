@@ -2,7 +2,7 @@ export interface ServiceItem {
   id: string;
   title: string;
   shortDesc: string;
-  category: 'General' | 'Cosmetic' | 'Restorative' | 'Orthodontics' | 'Pediatric' | 'Emergency';
+  category: string;
   icon: string;
   priceEstimate: string;
   duration: string;
@@ -51,7 +51,7 @@ export interface FAQItem {
   id: string;
   question: string;
   answer: string;
-  category: 'General' | 'Insurance & Pricing' | 'Procedures' | 'Emergency';
+  category: string;
 }
 
 export interface AppointmentData {

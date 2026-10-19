@@ -17,8 +17,8 @@ import {
   ChevronUp,
   MapPin,
   Mail,
-  HelpCircle,
   AlertCircle,
+  ExternalLink,
 } from 'lucide-react';
 import {
   CLINIC_INFO,
@@ -44,36 +44,25 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
     );
   };
 
-  // Contact form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: 'Dúvida Geral / Agendamento',
-    message: '',
-  });
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [generatedMailto, setGeneratedMailto] = useState('');
-
-  const handleContactSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      const subject = `[Caredent Agendamento] ${formData.subject} - ${formData.name}`;
-      const body = `Nome: ${formData.name}\nE-mail: ${formData.email}\nTelefone: ${formData.phone || 'Não informado'}\nAssunto: ${formData.subject}\n\nMensagem:\n${formData.message}`;
-      const mailtoUrl = `mailto:${CLINIC_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-      setGeneratedMailto(mailtoUrl);
-      setFormSubmitted(true);
-      window.location.href = mailtoUrl;
-    }
-  };
-
   return (
     <div className="space-y-20 sm:space-y-28 pb-16 overflow-hidden">
       {/* =========================================================================
+          BANNER DE AVISO DEMONSTRATIVO (DISCRETO E PROFISSIONAL)
+         ========================================================================= */}
+      <div className="bg-amber-50/90 border-b border-amber-200 text-amber-900 text-xs py-2 px-4 text-center">
+        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+          <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+          <span className="font-semibold">Modelo de Demonstração Comercial:</span>
+          <span>
+            Página modelo para clínicas odontológicas com agendamento ativo via Cal.com. Dados cadastrais, fotos, profissionais e valores são meramente ilustrativos.
+          </span>
+        </div>
+      </div>
+
+      {/* =========================================================================
           1. APRESENTAÇÃO PRINCIPAL (HERO DE ALTO IMPACTO)
          ========================================================================= */}
-      <section id="inicio" className="relative pt-6 sm:pt-10 scroll-mt-24">
+      <section id="inicio" className="relative pt-4 sm:pt-8 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Copy & CTA */}
@@ -88,7 +77,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-xl">
-                Consultas humanizadas com tecnologia 3D de ponta, anestesia computadorizada sem dor e agendamento online direto no horário de sua preferência.
+                Consultas humanizadas com tecnologia 3D integrada, anestesia computadorizada de fluxo suave para maior conforto e agendamento online direto no horário de sua preferência.
               </p>
 
               {/* Booking CTAs */}
@@ -100,7 +89,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                   className="px-7 py-4 min-h-[48px] bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold rounded-xl text-base shadow-sm hover:shadow-md transition-all cursor-pointer flex items-center justify-center gap-2 group text-center"
                 >
                   <Calendar className="w-5 h-5 transition-transform group-hover:scale-110" />
-                  <span>Agendar Consulta Agora</span>
+                  <span>Agendar Consulta Online</span>
                 </button>
 
                 <a
@@ -113,7 +102,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
               {/* Direct Cal link & trust markers */}
               <div className="pt-1 flex flex-wrap items-center gap-4 text-xs text-slate-500">
-                <span>Dúvidas no agendamento?</span>
+                <span>Deseja escolher pelo link direto?</span>
                 <a
                   href={CAL_PUBLIC_URL}
                   target="_blank"
@@ -121,23 +110,23 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                   className="text-[#00A8CC] hover:text-[#004F6E] font-medium underline inline-flex items-center gap-1"
                 >
                   <span>Abrir diretamente no Cal.com</span>
-                  <span aria-hidden="true">↗</span>
+                  <ExternalLink className="w-3 h-3" />
                 </a>
               </div>
 
               {/* Key Trust Highlights */}
               <div className="pt-4 border-t border-slate-200/80 grid grid-cols-3 gap-4 text-xs">
                 <div>
-                  <span className="block font-bold text-[#004F6E] text-sm">Sem Espera</span>
-                  <span className="text-slate-500">Horários pontuais</span>
+                  <span className="block font-bold text-[#004F6E] text-sm">Horários Pontuais</span>
+                  <span className="text-slate-500">Atendimento organizado</span>
                 </div>
                 <div>
                   <span className="block font-bold text-[#004F6E] text-sm">Escaneamento 3D</span>
-                  <span className="text-slate-500">Sem moldes de gesso</span>
+                  <span className="text-slate-500">Sem moldes tradicionais</span>
                 </div>
                 <div>
-                  <span className="block font-bold text-[#004F6E] text-sm">Plantão 24/7</span>
-                  <span className="text-slate-500">Triagem de urgência</span>
+                  <span className="block font-bold text-[#004F6E] text-sm">Acolhimento</span>
+                  <span className="text-slate-500">Foco no seu conforto</span>
                 </div>
               </div>
             </div>
@@ -159,7 +148,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                   <div>
                     <p className="text-xs font-semibold text-[#00A8CC] uppercase">Ambiente Digital & Acolhedor</p>
                     <p className="text-base font-bold text-[#004F6E]">Diagnóstico Digital com Escaneamento 3D</p>
-                    <p className="text-xs text-slate-500 mt-0.5">Atendimento personalizado com plano de tratamento claro</p>
+                    <p className="text-xs text-slate-500 mt-0.5">Atendimento personalizado com plano de tratamento transparente</p>
                   </div>
                   <button
                     type="button"
@@ -191,7 +180,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               ))}
             </div>
             <p className="text-[11px] text-slate-400 text-center mt-3">
-              * Métricas demonstrativas estruturadas para layout institucional.
+              * Métricas demonstrativas estruturadas para layout institucional da landing page.
             </p>
           </div>
         </div>
@@ -210,7 +199,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               Cuidado Completo para Sua Saúde e Estética Bucal
             </h2>
             <p className="text-slate-600 text-sm mt-2 max-w-2xl leading-relaxed">
-              Tratamentos executados com protocolos biológicos seguros, anestesia computadorizada e materiais de padrão internacional.
+              Tratamentos executados com protocolos biológicos modernos, anestesia computadorizada e materiais de alta biocompatibilidade.
             </p>
           </div>
 
@@ -236,12 +225,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             >
               <div>
                 <div className="w-12 h-12 rounded-xl bg-cyan-50 text-[#00A8CC] flex items-center justify-center mb-4 group-hover:bg-[#00A8CC] group-hover:text-white transition-colors">
-                  {service.category === 'Cosmetic' && <Smile className="w-6 h-6" />}
-                  {service.category === 'Restorative' && <ShieldCheck className="w-6 h-6" />}
-                  {service.category === 'Orthodontics' && <Activity className="w-6 h-6" />}
-                  {service.category === 'Pediatric' && <HeartPulse className="w-6 h-6" />}
-                  {service.category === 'Emergency' && <AlertCircle className="w-6 h-6" />}
-                  {service.category === 'General' && <Sparkles className="w-6 h-6" />}
+                  {service.category === 'Estética' && <Smile className="w-6 h-6" />}
+                  {service.category === 'Reabilitação Oral' && <ShieldCheck className="w-6 h-6" />}
+                  {service.category === 'Ortodontia' && <Activity className="w-6 h-6" />}
+                  {service.category === 'Odontopediatria' && <HeartPulse className="w-6 h-6" />}
+                  {service.category === 'Urgência' && <AlertCircle className="w-6 h-6" />}
+                  {service.category === 'Clínica Geral' && <Sparkles className="w-6 h-6" />}
+                  {service.category === 'Endodontia' && <ShieldCheck className="w-6 h-6" />}
                 </div>
 
                 <div className="flex items-center justify-between text-xs text-slate-400 mb-2">
@@ -269,7 +259,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
                 <div>
-                  <span className="text-slate-400 block text-[11px]">Valor Estimado:</span>
+                  <span className="text-slate-400 block text-[11px]">Faixa Estimativa:</span>
                   <span className="font-semibold text-slate-800">{service.priceEstimate}</span>
                 </div>
                 <button
@@ -314,9 +304,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                     <ShieldCheck className="w-5 h-5" />
                   </div>
                   <div>
-                    <h4 className="text-base font-semibold text-white">Anestesia Computadorizada Sem Dor</h4>
+                    <h4 className="text-base font-semibold text-white">Anestesia Computadorizada Confortável</h4>
                     <p className="text-xs text-slate-300 mt-0.5">
-                      Controle digital milimétrico do fluxo anestésico sem a sensação desagradável da picada tradicional.
+                      Controle digital milimétrico da pressão e do fluxo anestésico para minimizar desconfortos durante a aplicação.
                     </p>
                   </div>
                 </div>
@@ -340,7 +330,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                   <div>
                     <h4 className="text-base font-semibold text-white">Pausa Imediata se Sentir Desconforto</h4>
                     <p className="text-xs text-slate-300 mt-0.5">
-                      Você está no controle o tempo todo: basta levantar a mão e o dentista interrompe o procedimento instantaneamente.
+                      Você está no controle o tempo todo: basta sinalizar com a mão e o profissional interrompe o procedimento instantaneamente.
                     </p>
                   </div>
                 </div>
@@ -359,7 +349,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            {/* Clinic Architecture & Sterility Showcase */}
+            {/* Clinic Architecture Showcase */}
             <div className="lg:col-span-7">
               <div className="rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
                 <img
@@ -375,7 +365,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Interactive Smile Makeover Component */}
+          {/* Interactive Smile Component */}
           <div>
             <SmileComparison onOpenBooking={onOpenBooking} />
           </div>
@@ -395,7 +385,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             Conheça Nossa Estrutura e Nossos Especialistas
           </h2>
           <p className="text-slate-600 text-sm leading-relaxed">
-            Ambientes com biossegurança hospitalar, tomografia computadorizada cone-beam de baixa radiação e consultórios privativos projetados para o seu conforto.
+            Ambientes com biossegurança rigorosa, tomografia computadorizada cone-beam de baixa dosagem e consultórios privativos projetados para o seu bem-estar.
           </p>
         </div>
 
@@ -415,9 +405,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             <div className="w-12 h-12 rounded-xl bg-cyan-50 text-[#00A8CC] flex items-center justify-center mb-4">
               <Sparkles className="w-6 h-6" />
             </div>
-            <h3 className="text-base font-bold text-[#004F6E] mb-2">Fluxo 100% Digital</h3>
+            <h3 className="text-base font-bold text-[#004F6E] mb-2">Fluxo Digital</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Do escaneamento óptico ao planejamento de implantes guiados por computador para máxima previsibilidade clínica.
+              Do escaneamento óptico ao planejamento guiado por computador para máxima previsibilidade clínica.
             </p>
           </div>
 
@@ -437,7 +427,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             </div>
             <h3 className="text-base font-bold text-[#004F6E] mb-2">Biossegurança Rígida</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Autoclaves rastreadas, desinfecção de alto nível e protocolos rigorosos de esterilização para sua tranquilidade.
+              Autoclaves rastreadas, desinfecção criteriosa e protocolos de esterilização para sua tranquilidade.
             </p>
           </div>
         </div>
@@ -452,7 +442,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               Profissionais Dedicados à Sua Saúde
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              Perfis ilustrativos para estruturação do corpo clínico. Configure os cirurgiões-dentistas reais e registros no conselho (CRO) antes da publicação.
+              Perfis ilustrativos para estruturação do corpo clínico. Configure os cirurgiões-dentistas reais e registros no conselho (CRO) antes da publicação oficial.
             </p>
           </div>
 
@@ -488,7 +478,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
                 <div className="p-6 pt-0 border-t border-slate-100 mt-4 flex items-center justify-between">
                   <span className="text-xs text-slate-500">
-                    Dias: <strong className="text-slate-700">{doc.daysAvailable.join(', ')}</strong>
+                    Atendimento: <strong className="text-slate-700">{doc.daysAvailable.join(', ')}</strong>
                   </span>
                   <button
                     type="button"
@@ -515,10 +505,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               Avaliações & Experiências · Modelo Demonstrativo
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#004F6E] tracking-tight mt-1 text-balance">
-              Histórias de Quem Já Transformou o Sorriso
+              Histórias de Quem Já Cuidou do Sorriso Conosco
             </h2>
             <p className="text-slate-600 text-sm mt-2 leading-relaxed">
-              Exemplos ilustrativos de avaliações para estruturação da página. Antes do lançamento, inclua relatos reais e autorizados dos seus pacientes.
+              Exemplos ilustrativos de avaliações para estruturação da página. Antes do lançamento comercial, insira os relatos reais autorizados pelos seus pacientes.
             </p>
 
             {/* Aggregated Rating */}
@@ -530,7 +520,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
               </div>
               <span className="text-sm font-bold text-slate-800">4.9 / 5.0</span>
               <span className="text-xs text-slate-400">·</span>
-              <span className="text-xs text-slate-500 font-medium">Média ilustrativa de satisfação</span>
+              <span className="text-xs text-slate-500 font-medium">Índice ilustrativo de satisfação</span>
             </div>
           </div>
 
@@ -629,69 +619,74 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
         <div className="p-5 bg-cyan-50/60 rounded-2xl border border-cyan-100 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div>
-            <p className="text-sm font-bold text-[#004F6E]">Ainda tem alguma pergunta específica?</p>
-            <p className="text-xs text-slate-600">Nossa recepção responde prontamente via telefone ou mensagem direta.</p>
+            <p className="text-sm font-bold text-[#004F6E]">Deseja tirar dúvidas ou agendar um horário específico?</p>
+            <p className="text-xs text-slate-600">Acesse nossa agenda online com confirmação instantânea no Cal.com.</p>
           </div>
-          <a
-            href="#contato"
-            className="px-4 py-2.5 bg-[#004F6E] hover:bg-[#003c54] text-white text-xs font-semibold rounded-lg shrink-0 transition-colors"
+          <button
+            type="button"
+            {...calButtonAttributes}
+            onClick={handleCalFallback}
+            className="px-4 py-2.5 bg-[#004F6E] hover:bg-[#003c54] text-white text-xs font-semibold rounded-lg shrink-0 transition-colors cursor-pointer flex items-center gap-1.5"
           >
-            Falar com a Clínica
-          </a>
+            <Calendar className="w-3.5 h-3.5" />
+            <span>Ver Disponibilidade</span>
+          </button>
         </div>
       </section>
 
       {/* =========================================================================
-          7. CONTATO, LOCALIZAÇÃO & HORÁRIOS
+          7. CONTATO, LOCALIZAÇÃO & AGENDAMENTO ONLINE (SEM FORMULÁRIO)
          ========================================================================= */}
       <section id="contato" className="max-w-7xl mx-auto px-4 sm:px-8 scroll-mt-24 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-semibold text-[#00A8CC] uppercase tracking-wider block">
-            Fale Conosco
+            Atendimento & Localização
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#004F6E] tracking-tight">
-            Contato e Localização
+            Contato e Informações da Unidade
           </h2>
           <p className="text-slate-600 text-sm">
-            Tire dúvidas sobre convênios, localização ou envie uma mensagem direta para a nossa recepção.
+            Consulte nossos dados ilustrativos de atendimento e utilize a agenda online do Cal.com para escolher seu melhor dia e horário.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Direct Info */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Urgent Care Card */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          {/* Coluna 1: Informações e Plantão Demonstrativo */}
+          <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
+            {/* Plantão Ilustrativo */}
             <div className="bg-[#004F6E] text-white p-6 rounded-2xl shadow-md border border-[#006085]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#FDD835]" />
                 <span className="text-xs font-semibold text-[#FDD835] uppercase tracking-wider">
-                  Plantão de Urgência
+                  Plantão de Urgência · Demonstrativo
                 </span>
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Dor Aguda ou Trauma Dentário?</h3>
+              <h3 className="text-xl font-bold text-white mb-2">Dor Aguda ou Quebra Dental?</h3>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                Em caso de dor intensa, fratura ou sangramento bucal, faça contato telefônico imediatamente.
+                Em uma clínica real, este canal é reservado para atendimento prioritário de queixas agudas ou traumas.
               </p>
-              <a
-                href={`tel:${CLINIC_INFO.emergencyPhone.replace(/[^0-9+]/g, '')}`}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold text-xs rounded-xl transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Ligar: {CLINIC_INFO.emergencyPhone}</span>
-              </a>
+              <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 text-cyan-200 text-xs font-semibold rounded-xl border border-white/10">
+                <Phone className="w-4 h-4 text-[#FDD835]" />
+                <span>Linha Ilustrativa: {CLINIC_INFO.emergencyPhone}</span>
+              </div>
             </div>
 
-            {/* Clinic Info Cards */}
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-5 shadow-xs">
-              <h3 className="text-base font-bold text-[#004F6E]">Informações da Unidade</h3>
+            {/* Informações da Clínica */}
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-5 shadow-xs flex-1">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-[#004F6E]">Dados da Clínica (Demonstração)</h3>
+                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
+                  Ilustrativo
+                </span>
+              </div>
 
               <div className="flex items-start gap-3.5 text-xs text-slate-600">
                 <div className="w-8 h-8 rounded-lg bg-cyan-50 text-[#00A8CC] flex items-center justify-center shrink-0">
                   <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-semibold text-slate-900 block text-sm">Endereço</span>
-                  <p className="mt-0.5">{CLINIC_INFO.address}</p>
+                  <span className="font-semibold text-slate-900 block text-sm">Endereço da Unidade</span>
+                  <p className="mt-0.5 text-slate-600">{CLINIC_INFO.address}</p>
                 </div>
               </div>
 
@@ -700,17 +695,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-semibold text-slate-900 block text-sm">Recepção</span>
-                  <p className="mt-0.5">{CLINIC_INFO.receptionPhone}</p>
+                  <span className="font-semibold text-slate-900 block text-sm">Telefone da Recepção</span>
+                  <p className="mt-0.5 text-slate-600">{CLINIC_INFO.receptionPhone}</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5 text-xs text-slate-600">
                 <div className="w-8 h-8 rounded-lg bg-cyan-50 text-[#00A8CC] flex items-center justify-center shrink-0">
+                  <Mail className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="font-semibold text-slate-900 block text-sm">E-mail Institucional</span>
+                  <p className="mt-0.5 text-slate-600">{CLINIC_INFO.email}</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5 text-xs text-slate-600 pt-1 border-t border-slate-100">
+                <div className="w-8 h-8 rounded-lg bg-cyan-50 text-[#00A8CC] flex items-center justify-center shrink-0">
                   <Clock className="w-4 h-4" />
                 </div>
                 <div>
-                  <span className="font-semibold text-slate-900 block text-sm">Horários</span>
+                  <span className="font-semibold text-slate-900 block text-sm">Horários de Atendimento</span>
                   <p className="mt-0.5">{CLINIC_INFO.hours.weekdays}</p>
                   <p>{CLINIC_INFO.hours.saturday}</p>
                   <p className="text-slate-400">{CLINIC_INFO.hours.sunday}</p>
@@ -719,128 +724,91 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Form */}
-          <div className="lg:col-span-7">
-            <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs">
-              <h3 className="text-xl font-bold text-[#004F6E] mb-1">Envie uma Mensagem</h3>
-              <p className="text-xs text-slate-500 mb-6">
-                Nossa equipe responde em até 2 horas úteis.
-              </p>
+          {/* Coluna 2: Agendamento Cal.com em Destaque (Substituindo o formulário tradicional) */}
+          <div className="lg:col-span-7 flex flex-col">
+            <div className="bg-gradient-to-br from-white via-cyan-50/30 to-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col justify-between h-full space-y-6">
+              <div>
+                <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#00A8CC] tracking-wider uppercase bg-cyan-50 px-3 py-1 rounded-full border border-cyan-100 mb-3">
+                  <Calendar className="w-3.5 h-3.5 text-[#00A8CC]" />
+                  <span>Agendamento 100% Online</span>
+                </div>
 
-              {formSubmitted ? (
-                <div className="p-8 text-center space-y-4 bg-slate-50 border border-slate-200 rounded-xl">
-                  <div className="w-12 h-12 bg-cyan-100 text-[#004F6E] rounded-full flex items-center justify-center mx-auto">
-                    <Mail className="w-6 h-6" />
+                <h3 className="text-2xl font-bold text-[#004F6E] mb-2">
+                  Escolha Seu Horário Diretamente na Agenda Digital
+                </h3>
+
+                <p className="text-sm text-slate-600 leading-relaxed mb-6">
+                  Nesta demonstração, integramos o <strong>Cal.com</strong> como solução oficial de agendamento. O paciente visualiza os horários disponíveis em tempo real e confirma sua consulta sem necessidade de formulários manuais ou espera por retorno telefônico.
+                </p>
+
+                {/* Destaques do Agendamento */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-6">
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">Tempo Real</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">Disponibilidade atualizada da equipe sem conflito de agenda.</p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-base font-bold text-slate-900">Mensagem Preparada no Cliente de E-mail</h4>
-                    <p className="text-xs text-slate-600 max-w-md mx-auto mt-1 leading-relaxed">
-                      Geramos o rascunho com seus dados para envio direto ao e-mail da clínica (<strong className="text-slate-800">{CLINIC_INFO.email}</strong>).
-                    </p>
+
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">Lembretes Automáticos</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">Notificação por e-mail e calendário sincronizado.</p>
+                    </div>
                   </div>
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                    <a
-                      href={generatedMailto}
-                      className="px-5 py-2.5 min-h-[44px] bg-[#004F6E] hover:bg-[#003c54] text-white text-xs font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
-                    >
-                      <Mail className="w-4 h-4" />
-                      <span>Abrir no seu E-mail</span>
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => setFormSubmitted(false)}
-                      className="px-4 py-2.5 min-h-[44px] bg-white border border-slate-200 text-slate-600 hover:text-slate-900 text-xs font-medium rounded-xl transition-colors cursor-pointer flex items-center justify-center"
-                    >
-                      Voltar ao Formulário
-                    </button>
+
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">Sem Burocracia</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">O paciente escolhe o horário em menos de 1 minuto.</p>
+                    </div>
+                  </div>
+
+                  <div className="p-3.5 bg-white rounded-xl border border-slate-200 shadow-2xs flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-xs font-bold text-slate-900">Reagendamento Fácil</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">Autonomia para remarcar com antecedência conforme necessário.</p>
+                    </div>
                   </div>
                 </div>
-              ) : (
-                <form onSubmit={handleContactSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Nome Completo *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="Ex: Maria da Silva"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:border-[#00A8CC]"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Telefone / WhatsApp
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="(00) 00000-0000"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:border-[#00A8CC]"
-                      />
-                    </div>
-                  </div>
+              </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                        E-mail *
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        placeholder="seu@email.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:border-[#00A8CC]"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                        Assunto
-                      </label>
-                      <select
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm text-slate-800 focus:outline-hidden focus:border-[#00A8CC]"
-                      >
-                        <option value="Dúvida Geral">Dúvida Geral</option>
-                        <option value="Agendamento de Consulta">Agendamento de Consulta</option>
-                        <option value="Clareamento Dental">Clareamento Dental</option>
-                        <option value="Implantes e Prótese">Implantes e Prótese</option>
-                        <option value="Alinhadores Invisíveis">Alinhadores Invisíveis</option>
-                        <option value="Convênios e Pagamento">Convênios e Pagamento</option>
-                      </select>
-                    </div>
-                  </div>
+              {/* Botões de Ação Cal.com */}
+              <div className="pt-4 border-t border-slate-200/80 space-y-3">
+                <button
+                  type="button"
+                  {...calButtonAttributes}
+                  onClick={handleCalFallback}
+                  className="w-full py-4 px-6 min-h-[48px] bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold rounded-xl text-base transition-all cursor-pointer flex items-center justify-center gap-2.5 shadow-sm hover:shadow-md"
+                >
+                  <Calendar className="w-5 h-5" />
+                  <span>Escolher Horário no Cal.com</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
 
-                  <div>
-                    <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1.5">
-                      Como podemos ajudar? *
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      placeholder="Descreva brevemente o que você procura ou sua dúvida..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-white border border-slate-200 rounded-xl p-3.5 text-sm text-slate-800 focus:outline-hidden focus:border-[#00A8CC] resize-none"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="w-full py-3.5 px-6 min-h-[44px] bg-[#004F6E] hover:bg-[#003c54] text-white font-semibold rounded-xl text-sm transition-colors cursor-pointer flex items-center justify-center gap-2 shadow-xs"
+                <div className="flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-2 px-1">
+                  <span>Prefere abrir a página completa do agendamento?</span>
+                  <a
+                    href={CAL_PUBLIC_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#004F6E] hover:text-[#00A8CC] font-semibold underline inline-flex items-center gap-1"
                   >
-                    <Mail className="w-4 h-4" />
-                    <span>Preparar Mensagem de E-mail</span>
-                  </button>
-                </form>
-              )}
+                    <span>Acessar Link Direto no Cal.com</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+
+                <div className="mt-3 p-3 bg-slate-100/80 rounded-xl text-center">
+                  <p className="text-[11px] text-slate-500">
+                    Ambiente Demonstrativo Caredent · O link acima conduz ao evento de demonstração configurado no Cal.com.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -880,14 +848,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                 href={CAL_PUBLIC_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-6 py-4 min-h-[48px] bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-sm transition-colors flex items-center justify-center"
+                className="w-full sm:w-auto px-6 py-4 min-h-[48px] bg-white/10 hover:bg-white/20 text-white font-medium rounded-xl text-sm transition-colors flex items-center justify-center gap-1.5"
               >
-                Abrir Link no Cal.com ↗
+                <span>Abrir Link no Cal.com</span>
+                <ExternalLink className="w-4 h-4" />
               </a>
             </div>
 
             <p className="text-xs text-slate-300 pt-2">
-              Atendimento de Segunda a Sábado · Cancelamento ou remarcação facilitada · Protocolo sem dor
+              Atendimento de Segunda a Sábado · Cancelamento ou remarcação facilitada · Protocolo focado no seu conforto
             </p>
           </div>
         </div>

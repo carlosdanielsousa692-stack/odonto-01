@@ -1,34 +1,33 @@
 import React, { useState } from 'react';
-import { Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Sparkles, CheckCircle2, ArrowRight, Calendar } from 'lucide-react';
 import { calButtonAttributes, handleCalFallback, CAL_PUBLIC_URL } from '../utils/cal';
 
 interface SmileComparisonProps {
-  onOpenBooking: () => void;
+  onOpenBooking?: () => void;
 }
 
-export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking }) => {
-  const [sliderPosition, setSliderPosition] = useState(50);
+export const SmileComparison: React.FC<SmileComparisonProps> = () => {
   const [activeCase, setActiveCase] = useState<number>(0);
 
   const cases = [
     {
-      title: 'Full Porcelain Veneers & Whitening',
-      patient: 'Victoria H., 29',
-      duration: '2 appointments over 10 days',
-      shadeChange: '8 shades brighter (Vita shade A3 to BL2)',
-      description: 'Corrected chipped incisors, minor spacing, and deep tetracycline discoloration using ultra-thin custom ceramic veneers.',
-      beforeText: 'Discoloration & irregular enamel chips',
-      afterText: 'Harmonious Hollywood arch & natural luminescence',
+      title: 'Lentes de Contato em Cerâmica & Clareamento',
+      patient: 'Vitória H., 29 anos',
+      duration: 'Planejamento e 2 sessões clínicas',
+      shadeChange: 'Harmonização de cor e proporção',
+      description: 'Correção de pequenas imperfeições nas bordas incisais, fechamento de diastema e clareamento dental integrado para devolver luminosidade natural.',
+      beforeText: 'Desgaste incisal e pequenas assimetrias',
+      afterText: 'Alinhamento harmônico e acabamento cerâmico natural',
       image: '/images/happy_patient_smile_1792366053067.webp'
     },
     {
-      title: 'Digital Clear Aligners & Contouring',
-      patient: 'David P., 42',
-      duration: '8 months clear aligners',
-      shadeChange: 'Flawless dental arch alignment',
-      description: 'Corrected severe lower crowding and narrow upper smile arch with gentle clear aligners and enamel micro-abrasion.',
-      beforeText: 'Severe lower crowding & bite interference',
-      afterText: 'Symmetrical alignment & comfortable natural bite',
+      title: 'Ortodontia Digital com Alinhadores Transparentes',
+      patient: 'Davi P., 40 anos',
+      duration: '8 meses com placas transparentes',
+      shadeChange: 'Alinhamento progressivo da arcada',
+      description: 'Correção de apinhamento moderado nos dentes inferiores e nivelamento da curva do sorriso sem a necessidade de bráquetes metálicos.',
+      beforeText: 'Apinhamento dental e sobremordida',
+      afterText: 'Arcada simétrica e oclusão equilibrada',
       image: '/images/hero_dentist_consultation_1792366051819.webp'
     }
   ];
@@ -56,15 +55,15 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
           <div className="space-y-2.5 text-xs text-slate-200">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0" />
-              <span>Patient: <strong className="text-white">{current.patient}</strong></span>
+              <span>Paciente: <strong className="text-white">{current.patient}</strong> (Ilustrativo)</span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0" />
-              <span>Treatment Time: <strong className="text-white">{current.duration}</strong></span>
+              <span>Tempo Estimado: <strong className="text-white">{current.duration}</strong></span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0" />
-              <span>Result: <strong className="text-white">{current.shadeChange}</strong></span>
+              <span>Objetivo Clínico: <strong className="text-white">{current.shadeChange}</strong></span>
             </div>
           </div>
 
@@ -77,11 +76,11 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
                 onClick={() => setActiveCase(idx)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
                   activeCase === idx
-                    ? 'bg-[#00A8CC] text-white'
+                    ? 'bg-[#00A8CC] text-white shadow-xs'
                     : 'bg-white/10 hover:bg-white/20 text-slate-300'
                 }`}
               >
-                Case 0{idx + 1}
+                Caso 0{idx + 1}
               </button>
             ))}
           </div>
@@ -93,7 +92,8 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
               onClick={handleCalFallback}
               className="inline-flex items-center gap-2 px-6 py-3.5 min-h-[44px] bg-[#00A8CC] hover:bg-[#008cae] text-white font-semibold rounded-xl text-sm transition-all shadow-md cursor-pointer"
             >
-              <span>Schedule Smile Consultation</span>
+              <Calendar className="w-4 h-4" />
+              <span>Agendar Avaliação Estética</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
@@ -102,12 +102,12 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
               rel="noopener noreferrer"
               className="text-xs text-cyan-200 hover:text-white underline transition-colors"
             >
-              Ou agende diretamente na página do Cal.com ↗
+              Abrir diretamente na página do Cal.com ↗
             </a>
           </div>
         </div>
 
-        {/* Right Column: Visual Showcase & Interactive Reveal */}
+        {/* Right Column: Visual Showcase */}
         <div className="lg:col-span-7">
           <div className="relative rounded-2xl overflow-hidden bg-slate-900 border border-white/20 shadow-2xl aspect-16/10">
             <img
@@ -119,13 +119,13 @@ export const SmileComparison: React.FC<SmileComparisonProps> = ({ onOpenBooking 
               width={720}
               height={450}
             />
-            {/* Visual overlay badge */}
+            {/* Visual overlay badges */}
             <div className="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-xs text-white text-xs px-3 py-1.5 rounded-lg border border-white/10">
-              <span className="text-slate-400">Before: </span>
+              <span className="text-slate-400">Antes: </span>
               <span className="text-slate-200">{current.beforeText}</span>
             </div>
             <div className="absolute bottom-4 right-4 bg-[#00A8CC]/90 backdrop-blur-xs text-white text-xs px-3 py-1.5 rounded-lg font-medium shadow-md">
-              <span className="text-[#FDD835]">After: </span>
+              <span className="text-[#FDD835]">Planejado: </span>
               <span>{current.afterText}</span>
             </div>
           </div>
