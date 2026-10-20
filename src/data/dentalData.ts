@@ -2,49 +2,35 @@ import { ServiceItem, Doctor, Testimonial, BlogPost, FAQItem } from '../types';
 
 /**
  * ============================================================================
- * CONFIGURAÇÃO COMERCIAL E DE PUBLICAÇÃO DA CLÍNICA (MODELO DEMONSTRATIVO)
+ * INFORMAÇÕES DA CLÍNICA CAREDENT
  * ============================================================================
- * Centraliza todas as informações da clínica exibidas no site.
- * 
- * ATENÇÃO:
- * Este site é um modelo demonstrativo de alta conversão para clínicas odontológicas.
- * Todos os dados de contato, médicos, avaliações, valores e estatísticas são
- * ilustrativos e foram adaptados para o contexto brasileiro.
  */
 
 export const CLINIC_CONFIG = {
-  publicationStatus: {
-    isProductionReady: false,
-    isDemoData: true,
-    demoNotice:
-      'Ambiente Demonstrativo: Site modelo para apresentação comercial com agendamento online ativo via Cal.com. Dados cadastrais, fotos e valores são ilustrativos.',
-  },
-
-  // Informações Institucionais e Legais (Demonstrativo Brasileiro)
+  // Informações Institucionais
   branding: {
     name: 'Caredent',
     fullName: 'Caredent Clínica Odontológica',
     tagline: 'Odontologia Moderna, Cuidado Humanizado e Tecnologia Digital',
-    legalEntityName: 'Caredent Odontologia Especializada Ltda. (Demonstrativo)',
-    taxId: '00.000.000/0001-00 (Demonstrativo)',
+    legalEntityName: 'Caredent Odontologia Especializada',
     technicalDirector: {
       name: 'Dr. Arthur Silveira',
-      registry: 'CRO-SP 123.456 (Demonstrativo)',
+      title: 'Responsável Técnico',
     },
   },
 
-  // Meios de Contato (Exemplos Ilustrativos com DDD 11)
+  // Meios de Contato
   contact: {
-    receptionPhone: '(11) 3254-8900 (Demonstrativo)',
-    emergencyPhone: '(11) 99876-5432 (Demonstrativo)',
-    email: 'contato@caredent-demonstracao.com.br',
+    receptionPhone: '(11) 3254-8900',
+    emergencyPhone: '(11) 99876-5432',
+    email: 'contato@caredent.com.br',
     address: {
       street: 'Av. Paulista, 1000 - 12º andar',
       city: 'São Paulo',
       state: 'SP',
       postalCode: '01310-100',
       country: 'Brasil',
-      fullFormatted: 'Av. Paulista, 1000 - 12º andar, Bela Vista, São Paulo - SP (Demonstrativo)',
+      fullFormatted: 'Av. Paulista, 1000 - 12º andar, Bela Vista, São Paulo - SP',
     },
     hours: {
       weekdays: 'Segunda a Sexta: 08:00 às 20:00',
@@ -59,12 +45,12 @@ export const CLINIC_CONFIG = {
     publicUrl: 'https://cal.com/carlos-uehebs-cauefz/doutor',
   },
 
-  // Estatísticas Demonstrativas da Clínica
+  // Pilares e Diferenciais da Clínica
   stats: [
-    { label: 'Atendimentos Realizados', value: '18.500+' },
-    { label: 'Anos de Experiência', value: '16+' },
-    { label: 'Especialistas Integrados', value: '12' },
-    { label: 'Satisfação Demonstrativa', value: '99%' },
+    { label: 'Diagnóstico 3D', value: 'Scanner Digital' },
+    { label: 'Corpo Clínico Integrado', value: 'Multidisciplinar' },
+    { label: 'Biossegurança Hospitalar', value: 'Protocolos Rígidos' },
+    { label: 'Agendamento Direto', value: 'Online em Tempo Real' },
   ],
 };
 
@@ -78,13 +64,10 @@ export const CLINIC_INFO = {
   address: CLINIC_CONFIG.contact.address.fullFormatted,
   hours: CLINIC_CONFIG.contact.hours,
   stats: CLINIC_CONFIG.stats,
-  isDemo: CLINIC_CONFIG.publicationStatus.isDemoData,
-  demoNotice: CLINIC_CONFIG.publicationStatus.demoNotice,
 };
 
 /**
- * Catálogo de Procedimentos e Serviços Odontológicos em Português (pt-BR)
- * Valores demonstrativos em Reais (R$)
+ * Catálogo de Procedimentos e Serviços Odontológicos
  */
 export const CLINIC_SERVICES: ServiceItem[] = [
   {
@@ -93,7 +76,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Exame bucal minucioso, radiografias digitais de baixa radiação, remoção de tártaro por ultrassom e polimento do esmalte.',
     category: 'Clínica Geral',
     icon: 'Sparkles',
-    priceEstimate: 'R$ 220 - R$ 380 (estimativa)',
+    priceEstimate: 'Sob avaliação clínica',
     duration: '45 - 60 min',
     features: [
       'Raspagem ultrassônica suave e precisa',
@@ -109,7 +92,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Protocolos em consultório com tecnologia de luz LED/Laser e moldeiras personalizadas para manutenção domiciliar.',
     category: 'Estética',
     icon: 'Smile',
-    priceEstimate: 'R$ 750 - R$ 1.500 (estimativa)',
+    priceEstimate: 'Sob avaliação clínica',
     duration: '60 min',
     features: [
       'Sessões supervisionadas por cirurgião-dentista',
@@ -125,7 +108,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Reabilitação com implantes em titânio e cerâmica biocompatíveis, restaurando mastigação e harmonia estética.',
     category: 'Reabilitação Oral',
     icon: 'ShieldCheck',
-    priceEstimate: 'R$ 2.500 - R$ 4.800 (estimativa)',
+    priceEstimate: 'Planejamento individualizado',
     duration: 'Conforme planejamento individual',
     features: [
       'Planejamento guiado por tomografia computadorizada 3D',
@@ -141,8 +124,8 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Alinhamento dental com placas transparentes e confortáveis, dispensando o uso de bráquetes metálicos tradicionais.',
     category: 'Ortodontia',
     icon: 'Activity',
-    priceEstimate: 'R$ 5.500 - R$ 11.500 (estimativa)',
-    duration: '6 a 18 meses (estimativa)',
+    priceEstimate: 'Planejamento individualizado',
+    duration: 'Conforme evolução clínica',
     features: [
       'Placas transparentes praticamente imperceptíveis',
       'Simulação tridimensional do movimento dentário',
@@ -157,7 +140,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Consultas lúdicas, pacientes e tranquilas, pensadas especialmente para bebês, crianças e adolescentes.',
     category: 'Odontopediatria',
     icon: 'HeartPulse',
-    priceEstimate: 'R$ 180 - R$ 320 (estimativa)',
+    priceEstimate: 'Sob avaliação clínica',
     duration: '30 - 45 min',
     features: [
       'Abordagem comportamental positiva e lúdica',
@@ -173,8 +156,8 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Atendimento com horário prioritário para alívio de dor de dente aguda, fraturas, restaurações soltas ou traumas.',
     category: 'Urgência',
     icon: 'AlertCircle',
-    priceEstimate: 'R$ 250 - R$ 520 (estimativa)',
-    duration: 'Atendimento prioritário no mesmo dia',
+    priceEstimate: 'Atendimento prioritário',
+    duration: 'Conforme a necessidade do caso',
     features: [
       'Encaixes reservados diariamente para urgências',
       'Manejo farmacológico e clínico do desconforto',
@@ -189,7 +172,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Lâminas cerâmicas ultrafinas confeccionadas sob medida para harmonizar cor, formato, proporção e fechamento de espaços.',
     category: 'Estética',
     icon: 'Award',
-    priceEstimate: 'R$ 1.800 - R$ 3.200 por elemento (estimativa)',
+    priceEstimate: 'Planejamento individualizado',
     duration: '2 a 3 consultas',
     features: [
       'Cerâmica vítrea de alta resistência e brilho natural',
@@ -197,7 +180,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
       'Preparo dental conservador e minimamente invasivo',
       'Excelente estabilidade de cor ao longo dos anos'
     ],
-    description: 'Ideal para corrigir pequenas imperfeições, desgastes ou manchas severas, proporcionando um sorriso simétrico e harmonioso com seu rosto.'
+    description: 'Ideal para harmonizar pequenas imperfeições, desgastes ou manchas severas, proporcionando um sorriso simétrico e harmonioso com seu rosto.'
   },
   {
     id: 'root-canal-therapy',
@@ -205,7 +188,7 @@ export const CLINIC_SERVICES: ServiceItem[] = [
     shortDesc: 'Procedimento especializado com magnificação visual para eliminar infecções internas e salvar a estrutura dental.',
     category: 'Endodontia',
     icon: 'ShieldCheck',
-    priceEstimate: 'R$ 850 - R$ 1.600 (estimativa)',
+    priceEstimate: 'Sob avaliação clínica',
     duration: '60 - 90 min',
     features: [
       'Localização precisa de canais com magnificação óptica',
@@ -218,46 +201,46 @@ export const CLINIC_SERVICES: ServiceItem[] = [
 ];
 
 /**
- * Corpo Clínico (Perfis ilustrativos adaptados ao Brasil)
+ * Corpo Clínico e Especialidades
  */
 export const CLINIC_DOCTORS: Doctor[] = [
   {
     id: 'dr-arthur-silveira',
     name: 'Dr. Arthur Silveira',
-    title: 'Cirurgião-Dentista · Responsável Técnico',
+    title: 'Cirurgião-Dentista',
     specialty: 'Implantodontia e Reabilitação Oral',
-    experience: '16 Anos de Atuação',
-    education: 'Graduado e Especialista pela Universidade de São Paulo (USP) · CRO-SP 123.456 (Demonstrativo)',
-    bio: 'Especialista em cirurgia guiada por computador e implantes odontológicos. Foco em reabilitações orais planejadas digitalmente com precisão milimétrica e conforto.',
+    experience: 'Especialista em Cirurgia Guiada',
+    education: 'Atuação focada em reabilitações orais planejadas digitalmente com precisão e conforto.',
+    bio: 'Experiência em cirurgia guiada por computador e implantes odontológicos integrados ao fluxo digital da clínica.',
     image: '/images/dentist_doctor_portrait_1792366053271.webp',
     daysAvailable: ['Seg', 'Ter', 'Qui', 'Sex']
   },
   {
     id: 'dra-sarah-mendes',
     name: 'Dra. Sarah Mendes',
-    title: 'Cirurgiã-Dentista · Estética e Ortodontia',
-    specialty: 'Dentística Restauradora e Alinhadores Transparentes',
-    experience: '12 Anos de Atuação',
-    education: 'Especialista pela Unicamp · Membro da Sociedade Brasileira de Odontologia Estética · CRO-SP 134.567 (Demonstrativo)',
-    bio: 'Dedicada ao planejamento estético do sorriso, clareamento supervisionado e ortodontia digital invisível. Apaixonada por resultados naturais e preservação dental.',
+    title: 'Cirurgiã-Dentista',
+    specialty: 'Dentística Restauradora e Ortodontia Digital',
+    experience: 'Especialista em Estética Dental',
+    education: 'Dedicada ao planejamento estético do sorriso, clareamento supervisionado e alinhadores transparentes.',
+    bio: 'Foco em estética minimamente invasiva, preservação dental e harmonia funcional do sorriso.',
     image: '/images/hero_dentist_consultation_1792366051819.webp',
     daysAvailable: ['Seg', 'Qua', 'Qui', 'Sáb']
   },
   {
     id: 'dra-elena-ramos',
     name: 'Dra. Elena Ramos',
-    title: 'Cirurgiã-Dentista · Odontopediatria',
-    specialty: 'Saúde Bucal Infantil e Prevenção Familiar',
-    experience: '10 Anos de Atuação',
-    education: 'Especialista em Odontopediatria pela Unesp · CRO-SP 145.678 (Demonstrativo)',
-    bio: 'Especialista no acolhimento de crianças e pré-adolescentes, utilizando técnicas de psicologia comportamental lúdica para que as consultas sejam leves e prazerosas.',
+    title: 'Cirurgiã-Dentista',
+    specialty: 'Odontopediatria e Prevenção Familiar',
+    experience: 'Especialista em Saúde Bucal Infantil',
+    education: 'Especialista no acolhimento de bebês, crianças e adolescentes com abordagem positiva.',
+    bio: 'Utiliza técnicas de manejo comportamental acolhedor para que as consultas sejam leves, tranquilas e seguras.',
     image: '/images/happy_patient_smile_1792366053067.webp',
     daysAvailable: ['Ter', 'Qua', 'Sex', 'Sáb']
   }
 ];
 
 /**
- * Artigos Educativos do Blog (pt-BR)
+ * Artigos Educativos do Blog
  */
 export const BLOG_POSTS: BlogPost[] = [
   {
@@ -272,122 +255,158 @@ export const BLOG_POSTS: BlogPost[] = [
     image: '/images/dental_hygiene_procedure_1792366052723.webp',
     keyTakeaways: [
       'A prevenção precoce evita procedimentos de maior complexidade',
-      'A remoção profissional do cálculo dental não é realizada apenas com escovação caseira',
+      'A remoção profissional do cálculo dental complementa a higienização diária',
       'Avaliações periódicas incluem checagem da integridade gengival e óssea'
     ],
     content: [
-      'Muitos pacientes acreditam que a ausência de dor significa que a saúde bucal está 100% preservada. No entanto, o tártaro e a inflamação gengival inicial costumam progredir de maneira silenciosa.',
-      'Durante a consulta preventiva semestral na Caredent, avaliamos detalhadamente a saúde periodontal, realizamos a limpeza ultrassônica e revisamos a técnica de higienização diária.',
-      'Investir cerca de 45 minutos duas vezes ao ano garante dentes fortes, gengivas saudáveis e economia com tratamentos curativos extensos.'
+      'Muitos pacientes acreditam que a ausência de dor significa que a saúde bucal está perfeitamente preservada. No entanto, o acúmulo de placa e a inflamação gengival inicial costumam progredir de maneira silenciosa.',
+      'Durante a consulta preventiva semestral na Caredent, avaliamos detalhadamente a saúde periodontal, realizamos a profilaxia ultrassônica e orientamos sobre a técnica ideal de higienização.',
+      'Investir em prevenção periódica mantém dentes fortes, gengivas sadias e tranquilidade no dia a dia.'
     ]
   },
   {
     id: 1110,
-    title: '5 Cuidados Práticos para Manter os Dentes Claros',
+    title: 'Cuidados Práticos para Manter os Dentes Claros',
     slug: 'cuidados-praticos-manter-dentes-claros',
     category: 'Estética Dental',
     readTime: '5 min de leitura',
     date: '05 Out 2026',
     author: 'Dra. Sarah Mendes',
-    excerpt: 'Dicas fundamentadas para prolongar os efeitos do clareamento dental e evitar pigmentações precoces no esmalte.',
+    excerpt: 'Orientações fundamentadas para prolongar a luminosidade do sorriso e proteger o esmalte dental.',
     image: '/images/happy_patient_smile_1792366053067.webp',
     keyTakeaways: [
-      'Enxágue a boca com água após consumir café, vinho ou molhos escuros',
-      'Evite pastas dentais abrasivas com carvão ativado sem indicação',
-      'Utilize escova de cerdas ultramacias com movimentos suaves'
+      'Enxágue a boca com água após alimentos ou bebidas pigmentadas',
+      'Evite pastas dentais excessivamente abrasivas sem recomendação profissional',
+      'Utilize escova de cerdas macias com movimentos circulares suaves'
     ],
     content: [
-      'Um sorriso iluminado traz leveza e autoconfiança. Após realizar um procedimento de clareamento, os cuidados diários de alimentação e higiene são fundamentais.',
-      'Alimentos ricos em pigmentos (café, açaí, vinho tinto) possuem afinidade com a camada superficial. Enxaguar a boca logo após a ingestão reduz significativamente o depósito de corantes.',
-      'Consulte seu dentista sobre kits de manutenção periódica orientados especificamente para a sua sensibilidade.'
+      'Um sorriso saudável e iluminado traz bem-estar e autoconfiança. Os hábitos diários de higiene e alimentação são os principais aliados para manter o resultado dos tratamentos estéticos.',
+      'Bebidas com alto teor de corantes podem aderir à camada superficial do esmalte. O hábito simples de enxaguar com água logo após o consumo já faz uma grande diferença.',
+      'Consulte sempre seu dentista para orientações específicas e personalizadas para a sua rotina.'
     ]
   }
 ];
 
 /**
- * Depoimentos de Pacientes (Exemplos ilustrativos em pt-BR com indicação demonstrativa)
+ * Pilares da Experiência e Avaliação do Atendimento
  */
+export const PATIENT_EXPERIENCE_PILLARS = [
+  {
+    id: 'p-1',
+    title: 'Acolhimento Humanizado',
+    subtitle: 'Consultas sem pressa e escuta atenta',
+    description: 'Dedicamos tempo para entender seu histórico, ouvir suas expectativas e esclarecer cada dúvida antes de iniciar qualquer procedimento.',
+    highlight: 'Cuidado Centrado no Paciente',
+    badge: 'Acolhimento'
+  },
+  {
+    id: 'p-2',
+    title: 'Previsibilidade com Tecnologia 3D',
+    subtitle: 'Diagnóstico digital e simulação prévia',
+    description: 'Com escaneamento intraoral e planejamento computadorizado, você visualiza as etapas do tratamento com clareza e transparência.',
+    highlight: 'Fluxo 100% Digital',
+    badge: 'Tecnologia'
+  },
+  {
+    id: 'p-3',
+    title: 'Conforto em Cada Etapa',
+    subtitle: 'Protocolos suaves e ambiente relaxante',
+    description: 'Utilizamos anestesia computadorizada de fluxo controlado e técnicas minimamente invasivas para garantir uma consulta calma e agradável.',
+    highlight: 'Foco no Bem-Estar',
+    badge: 'Conforto'
+  },
+  {
+    id: 'p-4',
+    title: 'Transparência no Tratamento',
+    subtitle: 'Planos detalhados e sem surpresas',
+    description: 'Apresentamos opções claras de tratamento, orientações preventivas e suporte contínuo para que você tome decisões com total segurança.',
+    highlight: 'Clareza Clínica',
+    badge: 'Transparência'
+  }
+];
+
+// Mantido para retrocompatibilidade
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: 't-1',
-    patientName: 'Vitória Helena Ramos',
-    treatment: 'Lentes de Contato em Cerâmica',
+    patientName: 'Acolhimento Humanizado',
+    treatment: 'Consultas com tempo dedicado e escuta atenta',
     rating: 5,
-    review: 'A Dra. Sarah Mendes e toda a equipe da Caredent foram incríveis. Pude ver o planejamento digital antes de iniciar e o resultado ficou muito natural e harmonioso com meu rosto. Todo o processo foi muito atencioso.',
-    date: 'Setembro de 2026',
-    verified: false,
-    avatarText: 'VH'
+    review: 'Atendimento centrado nas necessidades de cada pessoa, com ambiente tranquilo e acolhedor para que você se sinta seguro em todas as consultas.',
+    date: 'Pilar Caredent',
+    verified: true,
+    avatarText: 'AH'
   },
   {
     id: 't-2',
-    patientName: 'Marcelo Silveira Lima',
-    treatment: 'Implante Dentário com Guia Digital',
+    patientName: 'Tecnologia Digital 3D',
+    treatment: 'Escaneamento intraoral e precisão clínica',
     rating: 5,
-    review: 'Tinha muito receio de cirurgias orais, mas o Dr. Arthur explicou cada etapa com tomografia 3D e a anestesia computadorizada foi extremamente tranquila. A recuperação foi ótima e mastigo com total segurança.',
-    date: 'Agosto de 2026',
-    verified: false,
-    avatarText: 'MS'
+    review: 'Substituição das moldagens convencionais por imagens tridimensionais de alta definição, permitindo um planejamento cirúrgico e ortodôntico muito mais preciso.',
+    date: 'Pilar Caredent',
+    verified: true,
+    avatarText: 'TD'
   },
   {
     id: 't-3',
-    patientName: 'Sofia e Lucas Linhares',
-    treatment: 'Odontopediatria e Prevenção',
+    patientName: 'Conforto e Bem-Estar',
+    treatment: 'Anestesia computadorizada e protocolos suaves',
     rating: 5,
-    review: 'Meu filho de 6 anos tinha pavor de entrar em consultório odontológico. A Dra. Elena teve uma paciência admirável e transformou a consulta em uma brincadeira leve. Agora ele não reclama quando marcamos o retorno.',
-    date: 'Outubro de 2026',
-    verified: false,
-    avatarText: 'SL'
+    review: 'Fluxo anestésico milimetricamente controlado para reduzir o desconforto, com respeito total ao tempo do paciente durante todo o procedimento.',
+    date: 'Pilar Caredent',
+    verified: true,
+    avatarText: 'CB'
   },
   {
     id: 't-4',
-    patientName: 'Davi Prado Albuquerque',
-    treatment: 'Alinhadores Invisíveis e Clareamento',
+    patientName: 'Comunicação Clara',
+    treatment: 'Transparência clínica e suporte dedicado',
     rating: 5,
-    review: 'Aos 40 anos resolvi alinhar os dentes inferiores. Os alinhadores transparentes foram discretíssimos no trabalho e muito práticos. Fiz o clareamento logo em seguida e a diferença no meu sorriso foi nítida.',
-    date: 'Julho de 2026',
-    verified: false,
-    avatarText: 'DP'
+    review: 'Apresentação detalhada de cada etapa com imagens da sua própria saúde bucal, oferecendo autonomia e segurança na escolha do tratamento.',
+    date: 'Pilar Caredent',
+    verified: true,
+    avatarText: 'CC'
   }
 ];
 
 /**
- * Dúvidas Frequentes (FAQ) em Português
+ * Dúvidas Frequentes (FAQ)
  */
 export const FAQS: FAQItem[] = [
   {
     id: 'faq-1',
     category: 'Geral',
     question: 'Com que frequência devo realizar a consulta preventiva e limpeza?',
-    answer: 'A recomendação padrão dos cirurgiões-dentistas é realizar a avaliação clínica e a profilaxia profissional a cada 6 meses. Pacientes com predisposição a cálculo ou alterações gengivais podem se beneficiar de intervalos de 3 a 4 meses, definidos individualmente.'
+    answer: 'A recomendação padrão dos cirurgiões-dentistas é realizar a avaliação clínica e a profilaxia profissional a cada 6 meses. Pacientes com necessidades periodontais específicas podem se beneficiar de acompanhamentos com intervalos ajustados individualmente.'
   },
   {
     id: 'faq-2',
     category: 'Procedimentos',
-    question: 'A colocação de implante dentário é desconfortável?',
-    answer: 'O procedimento é realizado sob anestesia local moderna, proporcionando total conforto durante a cirurgia. A maioria dos pacientes relata um pós-operatório muito mais brando do que o de uma extração convencional, bem controlado com analgésicos e anti-inflamatórios prescritos.'
+    question: 'Como funciona o procedimento de implante dentário?',
+    answer: 'O procedimento é planejado digitalmente a partir de imagens tomográficas tridimensionais e realizado sob anestesia local moderna, proporcionando conforto durante todo o tempo de cadeira. O pós-operatório costuma ser muito tranquilo com as orientações e medicações adequadas.'
   },
   {
     id: 'faq-3',
-    category: 'Pagamentos & Convênios',
-    question: 'A clínica aceita convênios odontológicos ou emite recibo para reembolso?',
-    answer: 'Atuamos no modelo particular e prestamos assistência completa na emissão de relatórios clínicos e recibos detalhados para solicitação de reembolso junto ao seu convênio. Oferecemos também opções facilitadas de parcelamento para tratamentos reabilitadores e estéticos.'
+    category: 'Pagamentos & Reembolso',
+    question: 'A clínica aceita convênios ou emite documentação para reembolso?',
+    answer: 'Atuamos no modelo particular e prestamos assistência completa na emissão de relatórios clínicos e recibos para que você possa solicitar reembolso junto ao seu convênio de saúde, conforme as regras da sua operadora.'
   },
   {
     id: 'faq-4',
     category: 'Procedimentos',
-    question: 'Quanto tempo dura o efeito do clareamento dental?',
-    answer: 'A durabilidade varia geralmente entre 1 e 3 anos, dependendo dos hábitos alimentares (frequência de café, vinho tinto, chá preto) e da rotina de higienização. Fornecemos orientações práticas e moldeiras para manutenções periódicas supervisionadas.'
+    question: 'Quais os cuidados para manter os resultados do clareamento dental?',
+    answer: 'A manutenção do clareamento depende principalmente dos hábitos diários e de higiene. Orientamos sobre cuidados com bebidas pigmentadas e fornecemos recomendações para preservação contínua da luminosidade dos dentes.'
   },
   {
     id: 'faq-5',
     category: 'Urgências',
-    question: 'O que é considerado uma urgência odontológica e como proceder?',
-    answer: 'Dor de dente aguda pulsátil, traumas ou quedas com quebra dental, restaurações ou próteses caídas na região anterior e sangramentos contínuos são situações prioritárias. Em caso de urgência, entre em contato imediatamente com nossa linha de plantão para triagem rápida.'
+    question: 'O que fazer em caso de dor intensa ou emergência odontológica?',
+    answer: 'Situações de dor aguda, traumas com fratura dental ou restaurações soltas em áreas anteriores recebem prioridade de atendimento. Entre em contato diretamente pelo nosso telefone de plantão para receber orientações rápidas.'
   },
   {
     id: 'faq-6',
     category: 'Diferenciais',
-    question: 'Quais são os diferenciais do fluxo digital da Caredent?',
-    answer: 'Utilizamos escaneamento intraoral tridimensional (eliminando aquelas massas de moldagem desconfortáveis), radiografias digitais de baixa dosagem, anestesia computadorizada de fluxo suave e ambiente privativo acolhedor com foco no bem-estar integral do paciente.'
+    question: 'Quais são as vantagens do fluxo digital da Caredent?',
+    answer: 'O escaneamento intraoral tridimensional substitui as massas de moldagem convencionais, trazendo mais rapidez, conforto e previsibilidade tanto para tratamentos estéticos quanto para alinhadores e implantes.'
   }
 ];

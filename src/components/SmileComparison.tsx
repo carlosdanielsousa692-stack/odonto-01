@@ -16,8 +16,8 @@ export const SmileComparison: React.FC<SmileComparisonProps> = () => {
       duration: 'Planejamento e 2 sessões clínicas',
       shadeChange: 'Harmonização de cor e proporção',
       description: 'Correção de pequenas imperfeições nas bordas incisais, fechamento de diastema e clareamento dental integrado para devolver luminosidade natural.',
-      beforeText: 'Desgaste incisal e pequenas assimetrias',
-      afterText: 'Alinhamento harmônico e acabamento cerâmico natural',
+      beforeText: 'Desgaste incisal e assimetrias',
+      afterText: 'Alinhamento harmônico e brilho natural',
       image: '/images/happy_patient_smile_1792366053067.webp'
     },
     {
@@ -26,7 +26,7 @@ export const SmileComparison: React.FC<SmileComparisonProps> = () => {
       duration: '8 meses com placas transparentes',
       shadeChange: 'Alinhamento progressivo da arcada',
       description: 'Correção de apinhamento moderado nos dentes inferiores e nivelamento da curva do sorriso sem a necessidade de bráquetes metálicos.',
-      beforeText: 'Apinhamento dental e sobremordida',
+      beforeText: 'Apinhamento dental anterior',
       afterText: 'Arcada simétrica e oclusão equilibrada',
       image: '/images/hero_dentist_consultation_1792366051819.webp'
     }
@@ -41,7 +41,7 @@ export const SmileComparison: React.FC<SmileComparisonProps> = () => {
         <div className="lg:col-span-5 space-y-5">
           <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FDD835] uppercase tracking-wider bg-white/10 px-3 py-1 rounded-full">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Casos Clínicos Ilustrativos · Demonstração</span>
+            <span>Resultados & Planejamento Clínico</span>
           </div>
 
           <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
@@ -55,11 +55,11 @@ export const SmileComparison: React.FC<SmileComparisonProps> = () => {
           <div className="space-y-2.5 text-xs text-slate-200">
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0" />
-              <span>Paciente: <strong className="text-white">{current.patient}</strong> (Ilustrativo)</span>
+              <span>Paciente: <strong className="text-white">{current.patient}</strong></span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0" />
-              <span>Tempo Estimado: <strong className="text-white">{current.duration}</strong></span>
+              <span>Duração Estimada: <strong className="text-white">{current.duration}</strong></span>
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0" />

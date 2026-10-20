@@ -3,7 +3,6 @@ import {
   Calendar,
   Phone,
   ShieldCheck,
-  Star,
   CheckCircle2,
   Clock,
   Sparkles,
@@ -19,12 +18,13 @@ import {
   Mail,
   AlertCircle,
   ExternalLink,
+  Star,
 } from 'lucide-react';
 import {
   CLINIC_INFO,
   CLINIC_SERVICES,
   CLINIC_DOCTORS,
-  TESTIMONIALS,
+  PATIENT_EXPERIENCE_PILLARS,
   FAQS,
 } from '../data/dentalData';
 import { CostCalculator } from '../components/CostCalculator';
@@ -47,22 +47,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
   return (
     <div className="space-y-20 sm:space-y-28 pb-16 overflow-hidden">
       {/* =========================================================================
-          BANNER DE AVISO DEMONSTRATIVO (DISCRETO E PROFISSIONAL)
-         ========================================================================= */}
-      <div className="bg-amber-50/90 border-b border-amber-200 text-amber-900 text-xs py-2 px-4 text-center">
-        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
-          <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-          <span className="font-semibold">Modelo de Demonstração Comercial:</span>
-          <span>
-            Página modelo para clínicas odontológicas com agendamento ativo via Cal.com. Dados cadastrais, fotos, profissionais e valores são meramente ilustrativos.
-          </span>
-        </div>
-      </div>
-
-      {/* =========================================================================
           1. APRESENTAÇÃO PRINCIPAL (HERO DE ALTO IMPACTO)
          ========================================================================= */}
-      <section id="inicio" className="relative pt-4 sm:pt-8 scroll-mt-24">
+      <section id="inicio" className="relative pt-6 sm:pt-10 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
             {/* Copy & CTA */}
@@ -147,8 +134,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                 <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-5 rounded-2xl border border-white/40 shadow-xl flex items-center justify-between">
                   <div>
                     <p className="text-xs font-semibold text-[#00A8CC] uppercase">Ambiente Digital & Acolhedor</p>
-                    <p className="text-base font-bold text-[#004F6E]">Diagnóstico Digital com Escaneamento 3D</p>
-                    <p className="text-xs text-slate-500 mt-0.5">Atendimento personalizado com plano de tratamento transparente</p>
+                    <p className="text-base font-bold text-[#004F6E]">Diagnóstico com Escaneamento 3D</p>
+                    <p className="text-xs text-slate-500 mt-0.5">Planejamento transparente com plano de tratamento detalhado</p>
                   </div>
                   <button
                     type="button"
@@ -164,24 +151,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
           </div>
         </div>
 
-        {/* Metrics Strip */}
+        {/* Pillars Strip */}
         <div className="mt-14 bg-slate-50 border-y border-slate-200/80 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
               {CLINIC_INFO.stats.map((stat) => (
                 <div key={stat.label}>
-                  <span className="block text-3xl sm:text-4xl font-extrabold text-[#004F6E] font-mono tracking-tight">
+                  <span className="block text-2xl sm:text-3xl font-extrabold text-[#004F6E] tracking-tight">
                     {stat.value}
                   </span>
-                  <span className="text-xs sm:text-sm font-medium text-slate-500 mt-1 block">
+                  <span className="text-xs sm:text-sm font-medium text-slate-600 mt-1 block">
                     {stat.label}
                   </span>
                 </div>
               ))}
             </div>
-            <p className="text-[11px] text-slate-400 text-center mt-3">
-              * Métricas demonstrativas estruturadas para layout institucional da landing page.
-            </p>
           </div>
         </div>
       </section>
@@ -259,7 +243,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
               <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
                 <div>
-                  <span className="text-slate-400 block text-[11px]">Faixa Estimativa:</span>
+                  <span className="text-slate-400 block text-[11px]">Planejamento:</span>
                   <span className="font-semibold text-slate-800">{service.priceEstimate}</span>
                 </div>
                 <button
@@ -436,13 +420,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
         <div className="space-y-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-xs font-semibold text-[#00A8CC] uppercase tracking-wider block">
-              Corpo Clínico · Perfis Demonstrativos
+              Corpo Clínico & Especialidades
             </span>
             <h3 className="text-2xl font-bold text-[#004F6E] mt-1">
               Profissionais Dedicados à Sua Saúde
             </h3>
             <p className="text-xs text-slate-500 mt-1">
-              Perfis ilustrativos para estruturação do corpo clínico. Configure os cirurgiões-dentistas reais e registros no conselho (CRO) antes da publicação oficial.
+              Equipe multidisciplinar atuando com técnicas integradas para um planejamento completo e seguro.
             </p>
           </div>
 
@@ -470,7 +454,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
                   <div className="p-6">
                     <h4 className="text-lg font-bold text-[#004F6E]">{doc.name}</h4>
-                    <p className="text-xs font-semibold text-[#00A8CC] mb-2">{doc.title}</p>
+                    <p className="text-xs font-semibold text-[#00A8CC] mb-2">{doc.specialty}</p>
                     <p className="text-xs text-slate-500 mb-3">{doc.education}</p>
                     <p className="text-xs text-slate-600 leading-relaxed">{doc.bio}</p>
                   </div>
@@ -496,65 +480,58 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
       </section>
 
       {/* =========================================================================
-          5. DEPOIMENTOS DE PACIENTES
+          5. EXPERIÊNCIA DO PACIENTE & PILARES DO CUIDADO
          ========================================================================= */}
-      <section id="depoimentos" className="bg-slate-50 py-16 sm:py-20 border-y border-slate-200/80 scroll-mt-24">
+      <section id="experiencia" className="bg-slate-50 py-16 sm:py-20 border-y border-slate-200/80 scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-8 space-y-10">
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-xs font-semibold text-[#00A8CC] uppercase tracking-wider block">
-              Avaliações & Experiências · Modelo Demonstrativo
+              Compromisso & Qualidade
             </span>
             <h2 className="text-3xl sm:text-4xl font-bold text-[#004F6E] tracking-tight mt-1 text-balance">
-              Histórias de Quem Já Cuidou do Sorriso Conosco
+              A Experiência de Cuidado Caredent
             </h2>
             <p className="text-slate-600 text-sm mt-2 leading-relaxed">
-              Exemplos ilustrativos de avaliações para estruturação da página. Antes do lançamento comercial, insira os relatos reais autorizados pelos seus pacientes.
+              Conheça os princípios que orientam cada etapa do nosso atendimento, da primeira conversa aos procedimentos de alta complexidade.
             </p>
 
-            {/* Aggregated Rating */}
             <div className="mt-4 inline-flex items-center gap-2.5 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-xs">
               <div className="flex text-[#FDD835]">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current" />
                 ))}
               </div>
-              <span className="text-sm font-bold text-slate-800">4.9 / 5.0</span>
-              <span className="text-xs text-slate-400">·</span>
-              <span className="text-xs text-slate-500 font-medium">Índice ilustrativo de satisfação</span>
+              <span className="text-xs text-slate-600 font-medium">Padrão de Excelência e Satisfação Contínua</span>
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TESTIMONIALS.map((t) => (
+            {PATIENT_EXPERIENCE_PILLARS.map((pillar) => (
               <div
-                key={t.id}
-                className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between"
+                key={pillar.id}
+                className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow"
               >
                 <div>
-                  <div className="flex text-[#FDD835] mb-3">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-current" />
-                    ))}
+                  <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#00A8CC] bg-cyan-50 px-2.5 py-1 rounded-full mb-3">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>{pillar.badge}</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed mb-4">
-                    "{t.review}"
+                  <h3 className="text-base font-bold text-[#004F6E] mb-1">{pillar.title}</h3>
+                  <p className="text-xs font-semibold text-[#00A8CC] mb-3">{pillar.subtitle}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                    {pillar.description}
                   </p>
                 </div>
 
                 <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <div>
-                    <p className="font-bold text-[#004F6E]">{t.patientName}</p>
-                    <p className="text-slate-400 text-[11px]">{t.treatment}</p>
-                  </div>
-                  <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
-                    Ilustrativo
-                  </span>
+                  <span className="font-semibold text-slate-800">{pillar.highlight}</span>
+                  <CheckCircle2 className="w-4 h-4 text-[#00A8CC]" />
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Cal.com CTA under testimonials */}
+          {/* Cal.com CTA under experience */}
           <div className="text-center pt-4">
             <button
               type="button"
@@ -635,7 +612,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
       </section>
 
       {/* =========================================================================
-          7. CONTATO, LOCALIZAÇÃO & AGENDAMENTO ONLINE (SEM FORMULÁRIO)
+          7. CONTATO, LOCALIZAÇÃO & AGENDAMENTO ONLINE
          ========================================================================= */}
       <section id="contato" className="max-w-7xl mx-auto px-4 sm:px-8 scroll-mt-24 space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
@@ -646,38 +623,38 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             Contato e Informações da Unidade
           </h2>
           <p className="text-slate-600 text-sm">
-            Consulte nossos dados ilustrativos de atendimento e utilize a agenda online do Cal.com para escolher seu melhor dia e horário.
+            Consulte nossos dados de atendimento e utilize a agenda online do Cal.com para escolher seu melhor dia e horário.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Coluna 1: Informações e Plantão Demonstrativo */}
+          {/* Coluna 1: Informações e Plantão */}
           <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
-            {/* Plantão Ilustrativo */}
+            {/* Plantão */}
             <div className="bg-[#004F6E] text-white p-6 rounded-2xl shadow-md border border-[#006085]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#FDD835]" />
                 <span className="text-xs font-semibold text-[#FDD835] uppercase tracking-wider">
-                  Plantão de Urgência · Demonstrativo
+                  Plantão de Urgência
                 </span>
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Dor Aguda ou Quebra Dental?</h3>
               <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                Em uma clínica real, este canal é reservado para atendimento prioritário de queixas agudas ou traumas.
+                Nossa clínica conta com suporte para atendimento prioritário de queixas agudas ou traumas dentários.
               </p>
-              <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 text-cyan-200 text-xs font-semibold rounded-xl border border-white/10">
+              <a
+                href={`tel:${CLINIC_INFO.emergencyPhone.replace(/[^0-9+]/g, '')}`}
+                className="inline-flex items-center gap-2 px-4 py-2.5 bg-white/10 hover:bg-white/20 text-cyan-200 text-xs font-semibold rounded-xl border border-white/10 transition-colors"
+              >
                 <Phone className="w-4 h-4 text-[#FDD835]" />
-                <span>Linha Ilustrativa: {CLINIC_INFO.emergencyPhone}</span>
-              </div>
+                <span>Linha Direta: {CLINIC_INFO.emergencyPhone}</span>
+              </a>
             </div>
 
             {/* Informações da Clínica */}
             <div className="bg-white border border-slate-200 rounded-2xl p-6 space-y-5 shadow-xs flex-1">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                <h3 className="text-base font-bold text-[#004F6E]">Dados da Clínica (Demonstração)</h3>
-                <span className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">
-                  Ilustrativo
-                </span>
+              <div className="border-b border-slate-100 pb-3">
+                <h3 className="text-base font-bold text-[#004F6E]">Dados da Clínica</h3>
               </div>
 
               <div className="flex items-start gap-3.5 text-xs text-slate-600">
@@ -724,7 +701,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
             </div>
           </div>
 
-          {/* Coluna 2: Agendamento Cal.com em Destaque (Substituindo o formulário tradicional) */}
+          {/* Coluna 2: Agendamento Cal.com em Destaque */}
           <div className="lg:col-span-7 flex flex-col">
             <div className="bg-gradient-to-br from-white via-cyan-50/30 to-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-xs flex flex-col justify-between h-full space-y-6">
               <div>
@@ -738,7 +715,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                 </h3>
 
                 <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                  Nesta demonstração, integramos o <strong>Cal.com</strong> como solução oficial de agendamento. O paciente visualiza os horários disponíveis em tempo real e confirma sua consulta sem necessidade de formulários manuais ou espera por retorno telefônico.
+                  Integramos o sistema oficial <strong>Cal.com</strong> para que você visualize os horários disponíveis em tempo real e confirme sua consulta com total praticidade, sem intermediários ou espera telefônica.
                 </p>
 
                 {/* Destaques do Agendamento */}
@@ -763,7 +740,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                     <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs font-bold text-slate-900">Sem Burocracia</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5">O paciente escolhe o horário em menos de 1 minuto.</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">Escolha seu horário em poucos cliques.</p>
                     </div>
                   </div>
 
@@ -771,7 +748,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
                     <CheckCircle2 className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs font-bold text-slate-900">Reagendamento Fácil</p>
-                      <p className="text-[11px] text-slate-500 mt-0.5">Autonomia para remarcar com antecedência conforme necessário.</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5">Autonomia para remarcar com antecedência quando necessário.</p>
                     </div>
                   </div>
                 </div>
@@ -805,7 +782,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onOpenBooking }) => {
 
                 <div className="mt-3 p-3 bg-slate-100/80 rounded-xl text-center">
                   <p className="text-[11px] text-slate-500">
-                    Ambiente Demonstrativo Caredent · O link acima conduz ao evento de demonstração configurado no Cal.com.
+                    Agendamento oficial com sincronização em tempo real e confirmação imediata.
                   </p>
                 </div>
               </div>

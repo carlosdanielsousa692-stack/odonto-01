@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Clock, Menu, X, Calendar, Sparkles } from 'lucide-react';
+import { Phone, Clock, Menu, X, Calendar } from 'lucide-react';
 import { CLINIC_INFO } from '../data/dentalData';
 import { calButtonAttributes, handleCalFallback, CAL_PUBLIC_URL } from '../utils/cal';
 
@@ -26,7 +26,7 @@ export const Header: React.FC<HeaderProps> = () => {
     { id: 'servicos', label: 'Tratamentos' },
     { id: 'diferenciais', label: 'Diferenciais' },
     { id: 'clinica', label: 'A Clínica' },
-    { id: 'depoimentos', label: 'Depoimentos' },
+    { id: 'experiencia', label: 'Experiência' },
     { id: 'faq', label: 'Dúvidas' },
     { id: 'contato', label: 'Contato' },
   ];
@@ -46,10 +46,13 @@ export const Header: React.FC<HeaderProps> = () => {
       <div className="bg-[#004F6E] text-white text-xs py-2 px-4 sm:px-8 border-b border-[#003c54]">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-2 gap-x-6">
           <div className="flex items-center gap-4 sm:gap-6 flex-wrap">
-            <div className="flex items-center gap-1.5 text-cyan-200">
+            <a
+              href={`tel:${CLINIC_INFO.emergencyPhone.replace(/[^0-9+]/g, '')}`}
+              className="flex items-center gap-1.5 text-cyan-200 hover:text-white transition-colors"
+            >
               <Phone className="w-3.5 h-3.5 text-[#FDD835]" aria-hidden="true" />
-              <span>Plantão (Ilustrativo): {CLINIC_INFO.emergencyPhone}</span>
-            </div>
+              <span>Plantão: {CLINIC_INFO.emergencyPhone}</span>
+            </a>
 
             <div className="hidden md:flex items-center gap-1.5 text-slate-300">
               <Clock className="w-3.5 h-3.5 text-[#00A8CC]" aria-hidden="true" />
@@ -58,7 +61,7 @@ export const Header: React.FC<HeaderProps> = () => {
           </div>
 
           <div className="flex items-center gap-3 text-xs">
-            <span className="hidden sm:inline text-slate-300">Agendamento Online Ativo:</span>
+            <span className="hidden sm:inline text-slate-300">Agendamento Online:</span>
             <a
               href={CAL_PUBLIC_URL}
               target="_blank"
@@ -89,7 +92,7 @@ export const Header: React.FC<HeaderProps> = () => {
               Caredent
             </span>
             <span className="text-[10px] text-[#00A8CC] font-semibold tracking-wider uppercase block mt-0.5">
-              Clínica Odontológica · Demo
+              Clínica Odontológica
             </span>
           </div>
         </a>

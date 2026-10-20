@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, Calendar, Info } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ArrowRight, ShieldCheck, Calendar, Shield } from 'lucide-react';
 import { CLINIC_INFO, CLINIC_SERVICES } from '../data/dentalData';
 import { calButtonAttributes, handleCalFallback, CAL_PUBLIC_URL } from '../utils/cal';
 
@@ -26,21 +26,24 @@ export const Footer: React.FC<FooterProps> = () => {
           <div className="space-y-1 text-center md:text-left">
             <div className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#FDD835] uppercase tracking-wider mb-1">
               <span className="w-2 h-2 rounded-full bg-[#FDD835]" />
-              <span>Pronto-Atendimento Demonstrativo</span>
+              <span>Pronto-Atendimento Odontológico</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-white">
               Precisa de Atendimento com Prioridade?
             </h3>
             <p className="text-xs sm:text-sm text-slate-200 max-w-xl">
-              Em uma clínica real, casos de trauma dentário, dor aguda ou sangramento são atendidos com triagem imediata.
+              Casos de dor aguda, fraturas ou traumas dentários recebem atenção prioritária em nossa clínica.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-            <div className="px-4 py-3 min-h-[44px] bg-white/10 text-cyan-100 text-xs font-medium rounded-xl border border-white/20 flex items-center justify-center gap-2">
+            <a
+              href={`tel:${CLINIC_INFO.emergencyPhone.replace(/[^0-9+]/g, '')}`}
+              className="px-4 py-3 min-h-[44px] bg-white/10 hover:bg-white/20 text-cyan-100 text-xs font-medium rounded-xl border border-white/20 flex items-center justify-center gap-2 transition-colors"
+            >
               <Phone className="w-4 h-4 text-[#FDD835]" />
-              <span>Plantão (Ilustrativo): {CLINIC_INFO.emergencyPhone}</span>
-            </div>
+              <span>Plantão: {CLINIC_INFO.emergencyPhone}</span>
+            </a>
 
             <button
               type="button"
@@ -66,16 +69,16 @@ export const Footer: React.FC<FooterProps> = () => {
               <div>
                 <span className="text-2xl font-bold text-white tracking-tight block leading-none">Caredent</span>
                 <span className="text-[10px] text-cyan-300 font-semibold uppercase tracking-wider block mt-0.5">
-                  Modelo Demonstrativo
+                  Odontologia Especializada
                 </span>
               </div>
             </div>
             <p className="text-xs text-slate-300 leading-relaxed">
-              Demonstração comercial de landing page para consultórios e clínicas odontológicas com agendamento online integrado via Cal.com.
+              Clínica odontológica de alta tecnologia e cuidado humanizado, com agendamento online integrado via Cal.com em tempo real.
             </p>
             <div className="pt-2 flex items-center gap-2 text-xs text-cyan-200">
               <ShieldCheck className="w-4 h-4 text-[#00A8CC]" />
-              <span>Integração com Cal.com ativa</span>
+              <span>Agendamento oficial sincronizado com Cal.com</span>
             </div>
           </div>
 
@@ -123,11 +126,11 @@ export const Footer: React.FC<FooterProps> = () => {
               </li>
               <li>
                 <a
-                  href="#depoimentos"
-                  onClick={(e) => scrollToSection('depoimentos', e)}
+                  href="#experiencia"
+                  onClick={(e) => scrollToSection('experiencia', e)}
                   className="hover:text-[#00A8CC] transition-colors"
                 >
-                  Depoimentos de Pacientes
+                  Experiência do Paciente
                 </a>
               </li>
               <li>
@@ -222,9 +225,9 @@ export const Footer: React.FC<FooterProps> = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#003c54] flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
           <div className="space-y-1 text-center sm:text-left">
-            <p>© 2026 Caredent Odontologia · Modelo Demonstrativo para Clientes.</p>
+            <p>© 2026 Caredent Odontologia Especializada. Todos os direitos reservados.</p>
             <p className="text-[11px] text-slate-500">
-              Site de demonstração com agendamento ativo via Cal.com. Dados cadastrais, fotos e corpo clínico são meramente ilustrativos.
+              Odontologia moderna com agendamento online integrado via Cal.com e atendimento humanizado.
             </p>
           </div>
 
@@ -244,7 +247,7 @@ export const Footer: React.FC<FooterProps> = () => {
               onClick={() => setActiveLegalModal('privacidade')}
               className="hover:text-slate-200 cursor-pointer underline-offset-2 hover:underline"
             >
-              Aviso de Privacidade (Demo)
+              Política de Privacidade
             </button>
             <span aria-hidden="true">·</span>
             <button
@@ -252,13 +255,13 @@ export const Footer: React.FC<FooterProps> = () => {
               onClick={() => setActiveLegalModal('termos')}
               className="hover:text-slate-200 cursor-pointer underline-offset-2 hover:underline"
             >
-              Termos de Uso (Demo)
+              Termos de Atendimento
             </button>
           </div>
         </div>
       </div>
 
-      {/* Demonstrative Legal Modal */}
+      {/* Legal Modal */}
       {activeLegalModal && (
         <div
           role="dialog"
@@ -271,16 +274,16 @@ export const Footer: React.FC<FooterProps> = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-2 mb-3 text-[#004F6E]">
-              <Info className="w-5 h-5 text-[#00A8CC]" />
+              <Shield className="w-5 h-5 text-[#00A8CC]" />
               <h4 className="text-lg font-bold">
-                {activeLegalModal === 'privacidade' ? 'Aviso de Privacidade Demonstrativo' : 'Termos de Uso Demonstrativos'}
+                {activeLegalModal === 'privacidade' ? 'Política de Privacidade' : 'Termos de Atendimento'}
               </h4>
             </div>
 
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
               {activeLegalModal === 'privacidade'
-                ? 'Este site é uma demonstração comercial de layout e agendamento online. Nenhum dado pessoal sensível é coletado nesta demonstração além das informações preenchidas voluntariamente pelo usuário ao testar a ferramenta oficial do Cal.com.'
-                : 'Esta página constitui um modelo visual e funcional para apresentação comercial a clínicas odontológicas. Os nomes, registros no CRO, marcas demonstrativas e valores contidos nesta página destinam-se exclusivamente a fins ilustrativos.'}
+                ? 'Em nossa clínica, a privacidade e a segurança dos dados dos pacientes são prioridades absolutas. As informações fornecidas durante o agendamento online via Cal.com são utilizadas exclusivamente para confirmação de consultas, lembretes de horários e contato direto com a nossa equipe de atendimento.'
+                : 'Os agendamentos realizados pela plataforma online são confirmados em tempo real. Solicitamos a gentileza de comunicar eventuais necessidades de cancelamento ou reagendamento com antecedência mínima de 24 horas para que o horário possa ser disponibilizado a outro paciente.'}
             </p>
 
             <button
@@ -288,7 +291,7 @@ export const Footer: React.FC<FooterProps> = () => {
               onClick={() => setActiveLegalModal(null)}
               className="w-full py-2.5 bg-[#004F6E] hover:bg-[#003c54] text-white text-xs font-semibold rounded-xl transition-colors cursor-pointer"
             >
-              Entendido
+              Fechar
             </button>
           </div>
         </div>

@@ -17,8 +17,8 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
     'general-checkup': {
       name: 'Avaliação Clínica, Raio-X & Profilaxia',
       basePrice: 280,
-      convenioCoverage: 0.85, // Simulação de reembolso preventivo
-      planoDiscount: 1.0, // Incluído no plano demonstrativo
+      convenioCoverage: 0.85,
+      planoDiscount: 1.0,
     },
     'teeth-whitening': {
       name: 'Clareamento Dental em Consultório',
@@ -79,13 +79,13 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100">
         <div>
           <span className="text-xs font-semibold text-[#00A8CC] uppercase tracking-wider block">
-            Simulador Ilustrativo
+            Simulador de Procedimentos
           </span>
           <h3 className="text-2xl font-bold text-slate-900 mt-0.5">
             Estimativa de Investimento e Condições
           </h3>
           <p className="text-sm text-slate-500 mt-1">
-            Simule estimativas demonstrativas conforme a modalidade de atendimento e opções de parcelamento.
+            Consulte faixas referenciais médias conforme a modalidade de atendimento e opções de parcelamento.
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
         <div className="lg:col-span-7 space-y-4">
           <div>
             <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-              Selecione o Procedimento Demonstrativo
+              Selecione o Procedimento
             </label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
               {Object.entries(pricingTable).map(([key, info]) => (
@@ -140,7 +140,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
                   }`}
                 >
                   <p className="font-semibold text-slate-900 truncate">{info.name}</p>
-                  <p className="text-slate-500 mt-1">Estimativa: {formatBRL(info.basePrice)}</p>
+                  <p className="text-slate-500 mt-1">Referência: {formatBRL(info.basePrice)}</p>
                 </button>
               ))}
             </div>
@@ -149,7 +149,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
           <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 text-xs text-slate-600 flex items-start gap-2.5">
             <HelpCircle className="w-4 h-4 text-[#00A8CC] shrink-0 mt-0.5" />
             <p>
-              Esta simulação foi elaborada exclusivamente para demonstrar a interatividade da landing page. Auxiliamos na emissão de relatórios clínicos para solicitação de reembolso no seu plano de saúde.
+              Prestamos todo o suporte na emissão de relatórios clínicos e documentação para solicitação de reembolso junto ao seu plano de saúde, além de opções flexíveis de pagamento.
             </p>
           </div>
         </div>
@@ -157,7 +157,7 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
         {/* Calculation Card */}
         <div className="lg:col-span-5 bg-gradient-to-b from-[#004F6E] to-[#00384f] text-white p-6 rounded-2xl shadow-md border border-[#006085]">
           <div className="flex justify-between items-center pb-4 border-b border-white/10 text-xs">
-            <span className="text-slate-300">Valor Estimado de Tabela:</span>
+            <span className="text-slate-300">Valor Médio Referencial:</span>
             <span className="font-semibold text-white font-mono">{formatBRL(item.basePrice)}</span>
           </div>
 
@@ -168,8 +168,8 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
                 {coverageType === 'convenio'
                   ? 'Estimativa de Reembolso:'
                   : coverageType === 'plano'
-                  ? 'Desconto Membro Caredent:'
-                  : 'Desconto à Vista Demonstrativo:'}
+                  ? 'Benefício Membro Caredent:'
+                  : 'Desconto à Vista:'}
               </span>
             </span>
             <span className="font-semibold text-emerald-300 font-mono">-{formatBRL(coverageAmount)}</span>
@@ -180,14 +180,14 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-3xl font-extrabold text-[#FDD835] font-mono">{formatBRL(outOfPocket)}</span>
               <span className="text-xs text-slate-300">
-                {coverageType === 'plano' && outOfPocket === 0 ? '(100% Coberto no Plano!)' : ''}
+                {coverageType === 'plano' && outOfPocket === 0 ? '(100% Coberto no Plano)' : ''}
               </span>
             </div>
           </div>
 
           <div className="pt-3 pb-5 flex items-center justify-between text-xs text-slate-300">
             <span>Ou Parcelamento Facilitado:</span>
-            <span className="font-bold text-white font-mono">Até 12x de {formatBRL(monthlyFinancing)}*</span>
+            <span className="font-bold text-white font-mono">Em até 12x de {formatBRL(monthlyFinancing)}*</span>
           </div>
 
           <button
@@ -211,10 +211,10 @@ export const CostCalculator: React.FC<CostCalculatorProps> = () => {
         </div>
       </div>
 
-      {/* Deontological & Demo Disclaimer */}
+      {/* Deontological Disclaimer */}
       <div className="mt-4 pt-3 border-t border-slate-200 text-center">
         <p className="text-[11px] text-slate-500 leading-relaxed max-w-2xl mx-auto">
-          * Valores e condições são estimativas meramente ilustrativas para demonstração da ferramenta. Conforme as normas éticas do Conselho Federal de Odontologia (CFO), qualquer plano de tratamento e valor definitivo exigem obrigatoriamente avaliação clínica presencial prévia.
+          * Valores e condições apresentados são referenciais médios. Conforme as normas éticas do Conselho Federal de Odontologia (CFO), qualquer plano de tratamento e valor definitivo exigem obrigatoriamente avaliação clínica presencial individualizada.
         </p>
       </div>
     </div>
